@@ -1,0 +1,77 @@
+<div class="p-28 min-h-fit">
+  <!-- Title -->
+  <h1 class="flex justify-center p-3 m-3 text-3xl border-b-2 border-stone-400">
+    Infos for {{ event.title }}
+  </h1>
+
+  <!-- Event image -->
+  <img
+    class="flex float-left max-w-sm mx-8 rounded-lg shadow-md max-h-64"
+    src="{{ event.image | noImage: '../assets/img/CatWithGlasses.jpeg' }}"
+  />
+
+  <div class="text-center text-black lg:text-left">
+    <div class="py-10 mx-6 text-center md:text-left">
+      <div class="grid gap-8 grid-1 md:grid-cols-2 lg:grid-cols-4">
+        <!-- Event description -->
+        <div class="">
+          <p
+            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start"
+          >
+            Description:
+          </p>
+          <p>
+            {{ event.description }}
+          </p>
+        </div>
+        <!-- Event infos -->
+        <div class="float-right">
+          <h6
+            class="flex justify-center mb-4 font-semibold uppercase md:justify-start"
+          >
+            Other Infos
+          </h6>
+          <p class="flex items-center justify-center mb-4 md:justify-start">
+            Location: {{ event.location }}
+          </p>
+          <p class="flex items-center justify-center mb-4 md:justify-start">
+            Date: placeholder
+          </p>
+          <p class="flex items-center justify-center mb-4 md:justify-start">
+            Likes: {{ event.likes }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Update/edit event  -->
+<div class="flex justify-center p-6">
+  <!-- Event delete button -->
+  <a routerLink="">
+    <button
+      type="button"
+      class="deletebtn min-h-full bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700"
+      (click)="deleteEvent(event)"
+    >
+      Delete
+    </button>
+  </a>
+  <!-- Event update button -->
+  <button
+    class="updatebtn min-h-full bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700"
+    type="button"
+    (click)="setUpdateBool(true)"
+  >
+    Update
+  </button>
+
+  <!-- Event form component -->
+  <div id="comp-render" *ngIf="UpdateBool">
+    <app-event-form
+      [editMode]="true"
+      [editableEvent]="event"
+      (createEvent)="updateEvent($event)"
+    ></app-event-form>
+  </div>
+</div>

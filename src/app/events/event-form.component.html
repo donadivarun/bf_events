@@ -1,0 +1,69 @@
+<div class="flex items-center justify-center">
+  <div class="justify-center p-4 bg-white shadow-lg rounded-xl">
+    <form
+      #eventForm="ngForm"
+      name="eventForm"
+      (ngSubmit)="!editMode ? add() : update(editableEvent); eventForm.reset()"
+      class=""
+    >
+      <label
+        >Title:
+        <input
+          type="text"
+          required
+          name="title"
+          #title="ngModel"
+          [(ngModel)]="event.title"
+          class="mx-6 border border-b-black"
+        />
+      </label>
+      <label
+        >Description:
+        <input
+          type="text"
+          name="Description"
+          #description="ngModel"
+          [(ngModel)]="event.description"
+          class="mx-6 border border-b-black"
+        />
+      </label>
+      <label
+        >Location:
+        <input
+          type="text"
+          name="Location"
+          #location="ngModel"
+          [(ngModel)]="event.location"
+          class="mx-6 border border-b-black"
+        />
+      </label>
+      <label
+        >Date:
+        <input
+          type="date"
+          name="date"
+          #date="ngModel"
+          [(ngModel)]="event.date"
+          class="mx-6 border border-b-black"
+        />
+      </label>
+
+      <button
+        type="submit"
+        [disabled]="!eventForm.form.valid"
+        class="min-h-full bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700"
+      >
+        <div *ngIf="editMode">Update event</div>
+        <div *ngIf="!editMode">Add event</div>
+      </button>
+      <div class="text-red-500">
+        <div
+          *ngIf="!(title.valid || title.pristine)"
+          class="alert alert-danger"
+        >
+          <div *ngIf="title.errors?.['required']">Title cannot be empty!</div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

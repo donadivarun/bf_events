@@ -1,0 +1,65 @@
+<div class="">
+  <!-- Add New Event Components -->
+  <div>
+    <div [ngClass]="add ? 'hidden' : 'my-4'">
+      <app-event-form (createEvent)="addEvent($event)"></app-event-form>
+    </div>
+    <Button
+      (click)="add = !add"
+      class="min-h-full bg-blue-400 rounded-lg mx-4 w-[130px] h-7 text-white hover:bg-sky-700"
+    >
+      Add
+    </Button>
+  </div>
+  
+  <table class="">
+    <tbody
+      class="grid content-center w-full gap-4 xl:grid-cols-4 lg:grid-cols-2 sm:grid-cols-1"
+    >
+      <tr
+        *ngFor="let event of events; trackBy: trackEvent"
+        class="w-[400px] max-h-[540px] flex justify-center mt-6 m-6"
+      >
+        <!-- Event tile -->
+        <div
+          class="flex h-[480px] p-12 duration-300 bg-white shadow-2xl w-[350px] rounded-xl hover:scale-105"
+        >
+          <a [routerLink]="['/info/' + event.id]">
+            <div class="pb-3">
+              <td class="text-2xl">
+                {{ event.title }}
+              </td>
+            </div>
+            <div class="pb-1 text-xs">
+              <td class="text-sm">
+                22.10.2022 {{ event.date | date: "mediumDate" }} from test user
+              </td>
+            </div>
+            <div
+              class="min-h-[200px] min-w-[200px] max-w-[250px] max-h-[250px]"
+            >
+              <td class="shadow-lg">
+                <img
+                  src="{{
+                    event.image | noImage: '../assets/img/CatWithGlasses.jpeg'
+                  }}"
+                  alt="{{ event.title + ' book cover' }}"
+                />
+              </td>
+            </div>
+
+            <div>
+              <td class="text-gray-500">{{ event.location }}</td>
+            </div>
+            <div class="float-right text-xl">
+              <td class="justify-self-center">
+                {{ event.likes }}
+                <mat-icon (click) = "likeEvent(event)">thumb_up</mat-icon>
+              </td>
+            </div>
+          </a>
+        </div>
+      </tr>
+    </tbody>
+  </table>
+</div>
