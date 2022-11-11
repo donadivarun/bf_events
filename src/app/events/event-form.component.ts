@@ -14,7 +14,11 @@ export class EventFormComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  if (this.editMode == true) {
+      this.event = this.editableEvent;
+    }
+  }
   add(): void {
     this.createEvent.emit(this.event);
 
