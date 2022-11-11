@@ -39,9 +39,15 @@
               class="min-h-[200px] min-w-[200px] max-w-[250px] max-h-[250px]"
             >
               <td class="shadow-lg">
-                <img
+                <!-- <img
                   src="{{
                     event.image | noImage: '../assets/img/CatWithGlasses.jpeg'
+                  }}"
+                  alt="{{ event.title + ' book cover' }}"
+                /> -->
+                <img
+                  src="{{
+                    event.image | noImage: '../assets/img/catIcon.png'
                   }}"
                   alt="{{ event.title + ' book cover' }}"
                 />
