@@ -73,7 +73,7 @@ export class EventinfoComponent implements OnInit {
         return of({});
       }))
       .subscribe(() => this.eventList.getEvents());
-      location.reload();
+   
 
   }
   

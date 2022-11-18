@@ -14,7 +14,7 @@ export class EventService {
   }
 
   addEvent(event: Event): Observable<Event> {
-    return this.httpClient.post<Event>(`${this.url}/event`, event);
+    return this.httpClient.post<Event>(`${this.url}/events`, event);
   }
 
   deleteEvent(event: Event): Observable<any> {
@@ -22,7 +22,8 @@ export class EventService {
   }
 
   updateEvent(event: Event): Observable<Event> {
-    return this.httpClient.put<Event>(`${this.url}/event`, event);
+    console.log("updating event");
+    return this.httpClient.put<Event>(`${this.url}/event/${event.id}`, event);
   }
   getEvent(id: String): Observable<Event> {
     console.log('calling network');
