@@ -23,7 +23,7 @@ export class EventService {
 
   updateEvent(event: Event): Observable<Event> {
     console.log("updating event");
-    return this.httpClient.put<Event>(`${this.url}/event/${event.id}`, event);
+    return this.httpClient.put<Event>(`${this.url}/event`, event);
   }
   getEvent(id: String): Observable<Event> {
     console.log('calling network');
