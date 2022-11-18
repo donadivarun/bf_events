@@ -12,14 +12,13 @@ import { EventsModule } from '../events/events.module';
   selector: 'app-eventinfo',
   templateUrl: './eventinfo.component.html',
   styleUrls: ['./eventinfo.component.css'],
-  providers:[EventListComponent],
+  providers: [EventListComponent],
 })
-
 export class EventinfoComponent implements OnInit {
-
+  edit = true;
   id = '';
   @Input()
-  event: Event = new Event('', '', '', '', '',0, new Date());
+  event: Event = new Event('', '', '', '', '', 0, new Date());
   descriptons: Descripton[] = [
     {
       content: 'Better,cooler,Cats!',
@@ -28,55 +27,63 @@ export class EventinfoComponent implements OnInit {
   ];
   errorMessage: string = '';
   UpdateBool: boolean = false;
-  constructor(private route: ActivatedRoute, private eventService: EventService, private eventList: EventListComponent) {}
+  constructor(
+    private route: ActivatedRoute,
+    private eventService: EventService,
+    private eventList: EventListComponent
+  ) {}
 
   showError(error: any): void {
-    this.errorMessage = error.message ? error.message :
-      error.status ?
-        `${error.status} - ${error.statusText}` :
-        'Server error';
+    this.errorMessage = error.message
+      ? error.message
+      : error.status
+      ? `${error.status} - ${error.statusText}`
+      : 'Server error';
   }
-  
+
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.id = id;
       this.getEvent();
-      console.log("loaded "+ this.id);
+      console.log('loaded ' + this.id);
     }
   }
   getEvent(): void {
-    this.eventService.getEvent(this.id)
+    this.eventService
+      .getEvent(this.id)
       // .pipe(catchError(err => {
       //   this.showError(err);
       //   return of();
       // }))
-      .subscribe(event => this.event = event);
+      .subscribe((event) => (this.event = event));
   }
   deleteEvent(event: Event): void {
-    alert("The event will be delted!")
-    this.eventService.deleteEvent(event)
-      .pipe(catchError(err => {
-        this.showError(err);
-        return of({});
-      }))
+    alert('The event will be delted!');
+    this.eventService
+      .deleteEvent(event)
+      .pipe(
+        catchError((err) => {
+          this.showError(err);
+          return of({});
+        })
+      )
       .subscribe(() => this.eventList.getEvents());
   }
 
-  setUpdateBool (bool: boolean): void{
+  setUpdateBool(bool: boolean): void {
     this.UpdateBool = bool;
   }
   updateEvent(event: Event): void {
-    this.eventService.updateEvent(event)
-      .pipe(catchError(err => {
-        this.showError(err);
-        return of({});
-      }))
+    this.eventService
+      .updateEvent(event)
+      .pipe(
+        catchError((err) => {
+          this.showError(err);
+          return of({});
+        })
+      )
       .subscribe(() => this.eventList.getEvents());
-      location.reload();
-   
-
+    location.reload();
   }
-  
-
 }

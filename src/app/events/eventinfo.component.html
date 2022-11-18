@@ -1,3 +1,25 @@
+<div
+  [ngClass]="edit ? 'hidden' : 'absolute my-4 z-40 w-full h-full bg-white/75'"
+>
+  <div
+    class="flex items-center justify-center w-12 h-12 ml-12 text-white bg-blue-400 rounded-full hover:bg-sky-700"
+  >
+    <button (click)="edit = !edit">
+      <div class="flex items-center justify-center h-12">
+        <mat-icon>clear</mat-icon>
+      </div>
+    </button>
+  </div>
+
+  <div *ngIf="UpdateBool">
+    <app-event-form
+      [editMode]="true"
+      [editableEvent]="event"
+      (createEvent)="updateEvent($event)"
+    ></app-event-form>
+  </div>
+</div>
+
 <div class="p-28 min-h-fit">
   <!-- Title -->
   <h1 class="flex justify-center p-3 m-3 text-3xl border-b-2 border-stone-400">
@@ -35,7 +57,7 @@
             Location: {{ event.location }}
           </p>
           <p class="flex items-center justify-center mb-4 md:justify-start">
-            Date: {{event.date}}
+            Date: placeholder
           </p>
           <p class="flex items-center justify-center mb-4 md:justify-start">
             Likes: {{ event.likes }}
@@ -51,27 +73,21 @@
   <a routerLink="">
     <button
       type="button"
-      class="deletebtn min-h-full bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700"
+      class="deletebtn bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700"
       (click)="deleteEvent(event)"
     >
       Delete
     </button>
   </a>
-  <!-- Event update button -->
-  <button
-    class="updatebtn min-h-full bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700"
-    type="button"
-    (click)="setUpdateBool(true)"
-  >
-    Update
-  </button>
 
   <!-- Event form component -->
-  <div id="comp-render" *ngIf="UpdateBool">
-    <app-event-form
-      [editMode]="true"
-      [editableEvent]="event"
-      (createEvent)="updateEvent($event)"
-    ></app-event-form>
-  </div>
+  <button
+    (click)="setUpdateBool(true)"
+    (click)="edit = !edit"
+    class="bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700"
+  >
+    <div class="">
+      <p>Update</p>
+    </div>
+  </button>
 </div>
