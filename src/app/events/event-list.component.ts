@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { catchError, of } from 'rxjs';
 import { Event } from '../models/event';
 import { EventService } from './event.service';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-event-list',
@@ -17,7 +18,7 @@ export class EventListComponent implements OnInit {
   errorMessage = '';
   UpdateBool = false;
 
-  constructor(private eventService: EventService) {}
+  constructor(private eventService: EventService, public authService: AuthService) {}
 
   showError(error: any): void {
     this.errorMessage = error.message
@@ -75,6 +76,7 @@ export class EventListComponent implements OnInit {
         })
       )
       .subscribe(() => this.getEvents());
+      location.reload();
   }
   likeEvent(event: Event): void {
     this.eventService.likeEvent(event)
