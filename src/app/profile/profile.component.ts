@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Event } from '../models/event';
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',

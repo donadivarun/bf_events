@@ -17,6 +17,9 @@
             >Bf Events</span
           >
         </a>
+        <div *ngIf="authService.userData as user">
+          {{ user.email }}
+        </div>
 
         <div class="2xl:hidden xl:hidden lg:hidden md:hidden sm:w-auto">
           <div
@@ -119,19 +122,10 @@
               >
             </li>
 
-            <li class="nav-item">
-              <a class="nav-link" (click)="authService.SignOut()">
+            <!-- <li>
+              <a (click)="authService.SignOut()">
                 <i class="fas fa-sign-out-alt"></i>Log out
               </a>
-            </li>
-            <!-- Add tab 
-            <li class="flex items-center">
-              <mat-icon>add</mat-icon>
-              <a
-                href="#"
-                class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-                >Add</a
-              > 
             </li> -->
 
             <!-- Profile tab -->

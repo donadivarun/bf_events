@@ -120,13 +120,12 @@ export class AuthService {
       `users/${user.uid}`
     );
     const userData: User = {
-      //uid: user.uid,
+      uid: user.uid,
       email: user.email,
       username: user.displayName,
       first_name: user.displayName,
       last_name: user.displayName,
       //emailVerified: user.emailVerified,
-      
     };
     console.log(userData);
     return userRef.set(userData, {
