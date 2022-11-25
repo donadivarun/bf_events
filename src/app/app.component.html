@@ -17,9 +17,6 @@
             >Bf Events</span
           >
         </a>
-        <div *ngIf="authService.userData as user">
-          {{ user.email }}
-        </div>
 
         <div class="2xl:hidden xl:hidden lg:hidden md:hidden sm:w-auto">
           <div
@@ -67,16 +64,18 @@
                 >
               </li>
               <!-- Profile tab -->
-              <li class="flex items-center">
-                <mat-icon>perm_identity</mat-icon>
-                <a
-                  (click)="sidebar = !sidebar"
-                  routerLink="/profile"
-                  routerLinkActive="active"
-                  class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-                  >Profile</a
-                >
-              </li>
+              <div *ngIf="authService.userData as user">
+                <li class="flex items-center">
+                  <mat-icon>perm_identity</mat-icon>
+                  <a
+                    (click)="sidebar = !sidebar"
+                    routerLink="/profile"
+                    routerLinkActive="active"
+                    class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                    >{{ user.email }}</a
+                  >
+                </li>
+              </div>
             </ul>
           </div>
           <Button (click)="sidebar = !sidebar">
@@ -100,17 +99,6 @@
               >
             </li>
 
-            <!-- Logo / Login tab-->
-            <li class="flex items-center">
-              <mat-icon>login</mat-icon>
-              <a
-                routerLink="/login"
-                routerLinkActive="active"
-                class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-                >Login</a
-              >
-            </li>
-
             <!-- Calender tab -->
             <li class="flex items-center">
               <mat-icon>calendar_today</mat-icon>
@@ -122,22 +110,48 @@
               >
             </li>
 
-            <!-- <li>
-              <a (click)="authService.SignOut()">
-                <i class="fas fa-sign-out-alt"></i>Log out
-              </a>
-            </li> -->
-
             <!-- Profile tab -->
-            <li class="flex items-center">
-              <mat-icon>perm_identity</mat-icon>
-              <a
-                routerLink="/profile"
-                routerLinkActive="active"
-                class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-                >Profile</a
-              >
-            </li>
+
+            <div *ngIf="authService.userData as user" class="flex items-center">
+              <li class="flex items-center">
+                <mat-icon>perm_identity</mat-icon>
+                <a
+                  routerLink="/profile"
+                  routerLinkActive="active"
+                  class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                >
+                  {{ user.email }}</a
+                >
+              </li>
+            </div>
+
+            <div class="flex items-center">
+              <div [ngClass]="authService.isLoggedIn ? 'hidden' : ''">
+                <!-- Logo / Login tab-->
+                <li class="flex items-center">
+                  <mat-icon>login</mat-icon>
+                  <a
+                    routerLink="/login"
+                    routerLinkActive="active"
+                    class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                    >Login</a
+                  >
+                </li>
+              </div>
+              <div [ngClass]="authService.isLoggedIn ? '' : 'hidden'">
+                <li class="flex items-center">
+                  <mat-icon>outlined_flag</mat-icon>
+                  <a
+                    (click)="authService.SignOut()"
+                    routerLink="/login"
+                    routerLinkActive="active"
+                    class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                  >
+                    <i class="fas fa-sign-out-alt"></i>Log out
+                  </a>
+                </li>
+              </div>
+            </div>
           </ul>
         </div>
       </div>
