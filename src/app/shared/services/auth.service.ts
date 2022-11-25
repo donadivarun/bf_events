@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
-
 export class AuthService {
   userData: any; // Save logged in user data
   constructor(
@@ -34,11 +33,11 @@ export class AuthService {
   }
   // Sign in with email/password
   SignIn(email: string, password: string) {
-    console.log(email, password)
+    console.log(email, password);
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log(result.user)
+        console.log(result.user);
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
@@ -52,8 +51,8 @@ export class AuthService {
   }
   // Sign up with email/password
   SignUp(email: string, password: string) {
-    console.log(email)
-    console.log(password)
+    console.log(email);
+    console.log(password);
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
@@ -61,7 +60,7 @@ export class AuthService {
         up and returns promise */
         this.SendVerificationMail();
         this.SetUserData(result.user);
-        console.log(result.user)
+        console.log(result.user);
       })
       .catch((error) => {
         window.alert(error.message);
@@ -89,7 +88,7 @@ export class AuthService {
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
-    console.log(user)
+    console.log(user);
     //return user !== null && user.emailVerified !== false ? true : false;
     return user !== null ? true : false;
   }
@@ -111,6 +110,8 @@ export class AuthService {
         window.alert(error);
       });
   }
+  //TODO: Change variables
+
   /* Setting up user data when sign in with username/password, 
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
@@ -119,18 +120,18 @@ export class AuthService {
       `users/${user.uid}`
     );
     const userData: User = {
-      uid: user.uid,
+      //uid: user.uid,
       email: user.email,
-      displayname: user.displayName,
-      first_name:user.displayName,
-      emailVerified: user.emailVerified,
+      username: user.displayName,
+      first_name: user.displayName,
+      last_name: user.displayName,
+      //emailVerified: user.emailVerified,
       
     };
-    console.log(userData)
+    console.log(userData);
     return userRef.set(userData, {
       merge: true,
     });
-    
   }
   // Sign out
   SignOut() {

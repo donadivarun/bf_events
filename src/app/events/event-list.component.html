@@ -29,72 +29,73 @@
     </button>
   </div>
 
-
   <table class="z-0 flex justify-center">
-
-  <div *ngIf="authService.userData as user"> 
-    {{user.email}}
-    {{user.first_name}}
-  </div>
-  <table class="">
-
-    <tbody
-      class="grid content-center w-full gap-2 xl:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-1 sm:content-center"
-    >
-      <tr
-        *ngFor="let event of events; trackBy: trackEvent"
-        class="2xl:w-[400px] 2xl:h-[540px] flex justify-center 2xl:mt-6 xl:w-[300px] xl:h-[480px] xl:mt-4 xl:mb-2 md:w-[250px] md:h-[380px] md:mt-4 md:m-3 md:mb-2x sm:w-[250px] sm:h-[380px] w-[300px] h-[440px]"
+    <div *ngIf="authService.userData as user">
+      {{ user.email }}
+      {{ user.first_name }}
+    </div>
+    <table class="">
+      <tbody
+        class="grid content-center w-full gap-2 xl:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-1 sm:content-center"
       >
-        <!-- Event tile -->
-        <div
-          class="flex 2xl:h-[480px] xl:h-[460px] lg:h-[380px] md:h-[380px] sm:h-[480px] p-12 duration-300 bg-white shadow-2xl w-[350px] rounded-xl hover:scale-105"
+        <tr
+          *ngFor="let event of events; trackBy: trackEvent"
+          class="2xl:w-[400px] 2xl:h-[540px] flex justify-center 2xl:mt-6 xl:w-[300px] xl:h-[480px] xl:mt-4 xl:mb-2 md:w-[250px] md:h-[380px] md:mt-4 md:m-3 md:mb-2x sm:w-[250px] sm:h-[380px] w-[300px] h-[440px]"
         >
-          <a [routerLink]="['/info/' + event.id]">
-            <div class="pb-3">
-              <td
-                class="text-2xl xl:text-2xl md:text-xl sm:text-2xl lg:text-xl"
+          <!-- Event tile -->
+          <div
+            class="flex 2xl:h-[480px] xl:h-[460px] lg:h-[380px] md:h-[380px] sm:h-[480px] p-12 duration-300 bg-white shadow-2xl w-[350px] rounded-xl hover:scale-105"
+          >
+            <a [routerLink]="['/info/' + event.id]">
+              <div class="pb-3">
+                <td
+                  class="text-2xl xl:text-2xl md:text-xl sm:text-2xl lg:text-xl"
+                >
+                  {{ event.title }}
+                </td>
+              </div>
+              <div class="pb-1">
+                <td class="xl:text-sm md:text-xs sm:text-sm lg:text-xs">
+                  22.10.2022 {{ event.date | date: "mediumDate" }} from test
+                  user
+                </td>
+              </div>
+              <div
+                class="xl:min-h-[200px] xl:min-w-[200px] xl:max-w-[250px] xl:max-h-[250px] sm:min-h-[200px] sm:min-w-[200px] sm:max-w-[250px] sm:max-h-[250px] md:min-h-[150px] md:min-w-[150px] md:max-w-[200px] lg:min-h-[150px] lg:min-w-[150px] lg:max-w-[200px] lg:max-h-[200px]"
               >
-                {{ event.title }}
-              </td>
-            </div>
-            <div class="pb-1">
-              <td class="xl:text-sm md:text-xs sm:text-sm lg:text-xs">
-                22.10.2022 {{ event.date | date: "mediumDate" }} from test user
-              </td>
-            </div>
-            <div
-              class="xl:min-h-[200px] xl:min-w-[200px] xl:max-w-[250px] xl:max-h-[250px] sm:min-h-[200px] sm:min-w-[200px] sm:max-w-[250px] sm:max-h-[250px] md:min-h-[150px] md:min-w-[150px] md:max-w-[200px] lg:min-h-[150px] lg:min-w-[150px] lg:max-w-[200px] lg:max-h-[200px]"
-            >
-              <td class="shadow-lg">
-                <img
-                  src="{{ event.image | noImage: '../assets/img/catIcon.png' }}"
-                  alt="{{ event.title + ' book cover' }}"
-                />
-              </td>
-            </div>
+                <td class="shadow-lg">
+                  <img
+                    src="{{
+                      event.image | noImage: '../assets/img/catIcon.png'
+                    }}"
+                    alt="{{ event.title + ' book cover' }}"
+                  />
+                </td>
+              </div>
 
-            <div>
-              <td
-                class="text-lg text-gray-500 xl:text-lg md:text-base sm:text-lg lg:text-base"
+              <div>
+                <td
+                  class="text-lg text-gray-500 xl:text-lg md:text-base sm:text-lg lg:text-base"
+                >
+                  {{ event.location }}
+                </td>
+              </div>
+              <div
+                class="float-right text-xl xl:text-xl md:text-lg sm:text-xl lg:text-lg"
               >
-                {{ event.location }}
-              </td>
-            </div>
-            <div
-              class="float-right text-xl xl:text-xl md:text-lg sm:text-xl lg:text-lg"
-            >
-              <td class="justify-self-center">
-                {{ event.likes }}
-                <mat-icon (click)="likeEvent(event)">thumb_up</mat-icon>
-              </td>
-            </div>
-          </a>
-        </div>
-      </tr>
-    </tbody>
+                <td class="justify-self-center">
+                  {{ event.likes }}
+                  <mat-icon (click)="likeEvent(event)">thumb_up</mat-icon>
+                </td>
+              </div>
+            </a>
+          </div>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="animate-bounce">
+      <p>load more events</p>
+    </div>
   </table>
-
-  <div class="animate-bounce">
-    <p>load more events</p>
-  </div>
 </div>
