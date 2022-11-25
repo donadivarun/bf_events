@@ -10,15 +10,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { CalenderComponent } from './calender/calender.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AuthService } from "./shared/services/auth.service";
+import { AuthService } from './shared/services/auth.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { SignUpComponent } from './sign-up/sign-up.component';
-
 
 @NgModule({
   declarations: [
@@ -26,7 +25,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     CalenderComponent,
     LoginComponent,
     ProfileComponent,
-    SignUpComponent,  ],
+    SignUpComponent,
+  ],
   imports: [
     AngularFireAuthModule,
     BrowserModule,
@@ -38,7 +38,10 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     provideAuth(() => getAuth()),
   ],
 
-  providers: [AuthService,  { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
+  providers: [
+    AuthService,
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -39,6 +39,7 @@
           class="flex px-[13px] py-3 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full"
         />
       </label>
+
       <label
         >Date:
         <input
@@ -49,7 +50,17 @@
           class="flex px-[13px] py-3 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full"
         />
       </label>
-
+      <label
+        >Img
+        <mat-icon>cloud_upload</mat-icon>
+        <input
+          type="text"
+          name="Location"
+          #location="ngModel"
+          [(ngModel)]="event.location"
+          class="flex px-[13px] py-3 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full"
+        />
+      </label>
       <button
         type="submit"
         [disabled]="!eventForm.form.valid"
