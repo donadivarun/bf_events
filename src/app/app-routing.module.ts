@@ -10,15 +10,18 @@ import { AuthGuard } from './shared/guard/auth.guard';
 const routes: Routes = [
   {
     path: 'dashboard',
-    component: EventListComponent, canActivate : [AuthGuard]
+    component: EventListComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'profile',
     component: ProfileComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'calender',
     component: CalenderComponent,
+    canActivate: [AuthGuard],
   },
   {
     path: 'login',
@@ -30,7 +33,8 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: CalenderComponent, //this needs to be changed!
+    component: EventListComponent,
+    canActivate: [AuthGuard],
   },
 ];
 

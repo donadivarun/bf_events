@@ -17,9 +17,6 @@
             >Bf Events</span
           >
         </a>
-        <div *ngIf="authService.userData as user">
-          {{ user.email }}
-        </div>
 
         <div class="2xl:hidden xl:hidden lg:hidden md:hidden sm:w-auto">
           <div
@@ -67,16 +64,21 @@
                 >
               </li>
               <!-- Profile tab -->
-              <li class="flex items-center">
-                <mat-icon>perm_identity</mat-icon>
-                <a
-                  (click)="sidebar = !sidebar"
-                  routerLink="/profile"
-                  routerLinkActive="active"
-                  class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-                  >Profile</a
-                >
-              </li>
+
+              <!-- <div *ngIf="authService.userData as user">
+                <li class="flex items-center">
+                  <mat-icon>perm_identity</mat-icon>
+                  <a
+                    (click)="sidebar = !sidebar"
+                    routerLink="/profile"
+                    routerLinkActive="active"
+                    class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                    >{{ user.email }}</a
+                  >
+                  {{ user.email }}
+                </li>
+                {{ user.email }}
+              </div> -->
             </ul>
           </div>
           <Button (click)="sidebar = !sidebar">
