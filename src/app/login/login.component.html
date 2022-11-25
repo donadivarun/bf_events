@@ -43,9 +43,12 @@
             Sign in
           </button>
         </div>
-        <div class="formGroup">
-          <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
-            <i class="fab fa-google-plus-g"></i>
+        <div class="flex justify-center mt-8">
+          <button
+            type="button"
+            (click)="authService.GoogleAuth()"
+            class="px-6 pt-3 bg-blue-400 rounded-lg w-[190px] h-[48px] gap-2 justify-center flex flex-row text-white hover:bg-blue-500"
+          >
             Log in with Google
           </button>
         </div>

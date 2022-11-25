@@ -139,9 +139,17 @@
                 </li>
               </div>
               <div [ngClass]="authService.isLoggedIn ? '' : 'hidden'">
-                <a (click)="authService.SignOut()">
-                  <i class="fas fa-sign-out-alt"></i>Log out
-                </a>
+                <li class="flex items-center">
+                  <mat-icon>outlined_flag</mat-icon>
+                  <a
+                    (click)="authService.SignOut()"
+                    routerLink="/login"
+                    routerLinkActive="active"
+                    class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                  >
+                    <i class="fas fa-sign-out-alt"></i>Log out
+                  </a>
+                </li>
               </div>
             </div>
           </ul>

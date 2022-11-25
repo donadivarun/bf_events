@@ -54,10 +54,10 @@
         >Img
         <mat-icon>cloud_upload</mat-icon>
         <input
-          type="text"
-          name="Location"
-          #location="ngModel"
-          [(ngModel)]="event.location"
+          type="file"
+          name="img"
+          #image="ngModel"
+          [(ngModel)]="event.image"
           class="flex px-[13px] py-3 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full"
         />
       </label>
@@ -65,6 +65,7 @@
         type="submit"
         [disabled]="!eventForm.form.valid"
         class="flex justify-center bg-blue-400 rounded-lg m-4 w-[130px] h-7 text-white hover:bg-sky-700"
+        
       >
         <div *ngIf="editMode">Update event</div>
         <div *ngIf="!editMode">Add event</div>

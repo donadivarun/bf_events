@@ -29,19 +29,19 @@
     </button>
   </div>
 
-
-    <table class="">
-      <tbody
-        class="grid content-center w-full gap-2 xl:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-1 sm:content-center"
+  <table class="flex items-center content-center justify-center w-full">
+    <tbody
+      class="grid content-center w-full gap-1 xl:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-1 sm:content-center"
+    >
+      <tr
+        *ngFor="let event of events; trackBy: trackEvent"
+        class="2xl:w-[400px] 2xl:h-[540px] flex justify-center 2xl:mt-6 xl:w-[300px] xl:h-[480px] xl:mt-4 xl:mb-2 md:w-[250px] md:h-[380px] md:mt-4 md:m-3 md:mb-2x sm:w-[250px] sm:h-[380px] w-[300px] h-[440px]"
       >
-        <tr
-          *ngFor="let event of events; trackBy: trackEvent"
-          class="2xl:w-[400px] 2xl:h-[540px] flex justify-center 2xl:mt-6 xl:w-[300px] xl:h-[480px] xl:mt-4 xl:mb-2 md:w-[250px] md:h-[380px] md:mt-4 md:m-3 md:mb-2x sm:w-[250px] sm:h-[380px] w-[300px] h-[440px]"
+        <!-- Event tile -->
+        <div
+          class="flex 2xl:h-[480px] xl:h-[460px] lg:h-[380px] md:h-[380px] sm:h-[480px] p-12 duration-300 bg-white shadow-2xl w-[350px] rounded-xl hover:scale-105"
         >
-          <!-- Event tile -->
-          <div
-            class="flex 2xl:h-[480px] xl:h-[460px] lg:h-[380px] md:h-[380px] sm:h-[480px] p-12 duration-300 bg-white shadow-2xl w-[350px] rounded-xl hover:scale-105"
-          >
+          <div>
             <a [routerLink]="['/info/' + event.id]">
               <div class="pb-3">
                 <td
@@ -56,6 +56,7 @@
                   user
                 </td>
               </div>
+
               <div
                 class="xl:min-h-[200px] xl:min-w-[200px] xl:max-w-[250px] xl:max-h-[250px] sm:min-h-[200px] sm:min-w-[200px] sm:max-w-[250px] sm:max-h-[250px] md:min-h-[150px] md:min-w-[150px] md:max-w-[200px] lg:min-h-[150px] lg:min-w-[150px] lg:max-w-[200px] lg:max-h-[200px]"
               >
@@ -76,17 +77,18 @@
                   {{ event.location }}
                 </td>
               </div>
-              <div
-                class="float-right text-xl xl:text-xl md:text-lg sm:text-xl lg:text-lg"
-              >
-                <td class="justify-self-center">
-                  {{ event.likes }}
-                  <mat-icon (click)="likeEvent(event)">thumb_up</mat-icon>
-                </td>
-              </div>
             </a>
+            <div
+              class="float-right text-xl xl:text-xl md:text-lg sm:text-xl lg:text-lg"
+            >
+              <td class="justify-self-center">
+                {{ event.likes }}
+                <mat-icon (click)="likeEvent(event)">thumb_up</mat-icon>
+              </td>
+            </div>
           </div>
-        </tr>
-      </tbody>
-    </table>
+        </div>
+      </tr>
+    </tbody>
+  </table>
 </div>
