@@ -1,5 +1,7 @@
-<div class="flex items-center justify-center">
-  <div class="justify-center p-4 bg-white shadow-lg rounded-xl">
+<div class="flex items-center content-center justify-center">
+  <div
+    class="flex items-center content-center justify-center h-[480px] p-12 duration-300 bg-white shadow-2xl w-[350px] rounded-xl"
+  >
     <form
       #eventForm="ngForm"
       name="eventForm"
@@ -14,18 +16,18 @@
           name="title"
           #title="ngModel"
           [(ngModel)]="event.title"
-          class="mx-6 border border-b-black"
+          class="flex px-[13px] py-3 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full"
         />
       </label>
       <label
         >Description:
-        <input
+        <textarea
           type="text"
           name="Description"
           #description="ngModel"
           [(ngModel)]="event.description"
-          class="mx-6 border border-b-black"
-        />
+          class="flex px-[13px] py-3 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full"
+        ></textarea>
       </label>
       <label
         >Location:
@@ -34,7 +36,7 @@
           name="Location"
           #location="ngModel"
           [(ngModel)]="event.location"
-          class="mx-6 border border-b-black"
+          class="flex px-[13px] py-3 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full"
         />
       </label>
       <label
@@ -44,14 +46,14 @@
           name="date"
           #date="ngModel"
           [(ngModel)]="event.date"
-          class="mx-6 border border-b-black"
+          class="flex px-[13px] py-3 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full"
         />
       </label>
 
       <button
         type="submit"
         [disabled]="!eventForm.form.valid"
-        class="min-h-full bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700"
+        class="flex justify-center bg-blue-400 rounded-lg m-4 w-[130px] h-7 text-white hover:bg-sky-700"
       >
         <div *ngIf="editMode">Update event</div>
         <div *ngIf="!editMode">Add event</div>

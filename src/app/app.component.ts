@@ -12,6 +12,7 @@ import { AuthService } from './shared/services/auth.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  sidebar = true;
   add = false;
   title = 'Bf events';
   events: Event[] = [];

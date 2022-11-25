@@ -1,69 +1,91 @@
 <div class="">
   <!-- Add New Event Components -->
   <div>
-    <div [ngClass]="add ? 'hidden' : 'my-4'">
-      <app-event-form (createEvent)="addEvent($event)"></app-event-form>
-    </div>
-    <Button
-      (click)="add = !add"
-      class="min-h-full bg-blue-400 rounded-lg mx-4 w-[130px] h-7 text-white hover:bg-sky-700"
+    <div
+      [ngClass]="
+        add ? 'hidden' : 'absolute my-4 z-40 w-full h-full bg-white/75 '
+      "
     >
-      Add
-    </Button>
+      <div
+        class="flex items-center justify-center w-12 h-12 ml-12 text-white bg-blue-400 rounded-full hover:bg-sky-700"
+      >
+        <button (click)="add = !add">
+          <div class="flex items-center justify-center h-12">
+            <mat-icon>clear</mat-icon>
+          </div>
+        </button>
+      </div>
+      <div class="opacity-100">
+        <app-event-form (createEvent)="addEvent($event)"></app-event-form>
+      </div>
+    </div>
+    <button
+      (click)="add = !add"
+      class="flex items-center justify-center w-12 h-12 mt-3 ml-12 text-white duration-75 bg-blue-400 rounded-full hover:bg-sky-700"
+    >
+      <div class="flex items-center justify-center h-12">
+        <mat-icon>add</mat-icon>
+      </div>
+    </button>
   </div>
+
+
+  <table class="z-0 flex justify-center">
+
   <div *ngIf="authService.userData as user"> 
     {{user.email}}
     {{user.first_name}}
   </div>
   <table class="">
+
     <tbody
-      class="grid content-center w-full gap-4 xl:grid-cols-4 lg:grid-cols-2 sm:grid-cols-1"
+      class="grid content-center w-full gap-2 xl:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-1 sm:content-center"
     >
       <tr
         *ngFor="let event of events; trackBy: trackEvent"
-        class="w-[400px] max-h-[540px] flex justify-center mt-6 m-6"
+        class="2xl:w-[400px] 2xl:h-[540px] flex justify-center 2xl:mt-6 xl:w-[300px] xl:h-[480px] xl:mt-4 xl:mb-2 md:w-[250px] md:h-[380px] md:mt-4 md:m-3 md:mb-2x sm:w-[250px] sm:h-[380px] w-[300px] h-[440px]"
       >
         <!-- Event tile -->
         <div
-          class="flex h-[480px] p-12 duration-300 bg-white shadow-2xl w-[350px] rounded-xl hover:scale-105"
+          class="flex 2xl:h-[480px] xl:h-[460px] lg:h-[380px] md:h-[380px] sm:h-[480px] p-12 duration-300 bg-white shadow-2xl w-[350px] rounded-xl hover:scale-105"
         >
           <a [routerLink]="['/info/' + event.id]">
             <div class="pb-3">
-              <td class="text-2xl">
+              <td
+                class="text-2xl xl:text-2xl md:text-xl sm:text-2xl lg:text-xl"
+              >
                 {{ event.title }}
               </td>
             </div>
-            <div class="pb-1 text-xs">
-              <td class="text-sm">
+            <div class="pb-1">
+              <td class="xl:text-sm md:text-xs sm:text-sm lg:text-xs">
                 22.10.2022 {{ event.date | date: "mediumDate" }} from test user
               </td>
             </div>
             <div
-              class="min-h-[200px] min-w-[200px] max-w-[250px] max-h-[250px]"
+              class="xl:min-h-[200px] xl:min-w-[200px] xl:max-w-[250px] xl:max-h-[250px] sm:min-h-[200px] sm:min-w-[200px] sm:max-w-[250px] sm:max-h-[250px] md:min-h-[150px] md:min-w-[150px] md:max-w-[200px] lg:min-h-[150px] lg:min-w-[150px] lg:max-w-[200px] lg:max-h-[200px]"
             >
               <td class="shadow-lg">
-                <!-- <img
-                  src="{{
-                    event.image | noImage: '../assets/img/CatWithGlasses.jpeg'
-                  }}"
-                  alt="{{ event.title + ' book cover' }}"
-                /> -->
                 <img
-                  src="{{
-                    event.image | noImage: '../assets/img/catIcon.png'
-                  }}"
+                  src="{{ event.image | noImage: '../assets/img/catIcon.png' }}"
                   alt="{{ event.title + ' book cover' }}"
                 />
               </td>
             </div>
 
             <div>
-              <td class="text-gray-500">{{ event.location }}</td>
+              <td
+                class="text-lg text-gray-500 xl:text-lg md:text-base sm:text-lg lg:text-base"
+              >
+                {{ event.location }}
+              </td>
             </div>
-            <div class="float-right text-xl">
+            <div
+              class="float-right text-xl xl:text-xl md:text-lg sm:text-xl lg:text-lg"
+            >
               <td class="justify-self-center">
                 {{ event.likes }}
-                <mat-icon (click) = "likeEvent(event)">thumb_up</mat-icon>
+                <mat-icon (click)="likeEvent(event)">thumb_up</mat-icon>
               </td>
             </div>
           </a>
@@ -71,4 +93,8 @@
       </tr>
     </tbody>
   </table>
+
+  <div class="animate-bounce">
+    <p>load more events</p>
+  </div>
 </div>
