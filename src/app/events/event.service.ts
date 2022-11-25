@@ -3,6 +3,7 @@ import { Event } from '../models/event';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +32,10 @@ export class EventService {
   }
   likeEvent(event: Event): Observable<Event> {
   return this.httpClient.post<Event>(`${this.url}/event/like`, event);
+}
+
+adduser(user: User): Observable<User> {
+  return this.httpClient.post<User>(`${this.url}/user`, user);
 }
 
   private url: string = environment.url;

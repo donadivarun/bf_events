@@ -29,7 +29,15 @@
     </button>
   </div>
 
+
   <table class="z-0 flex justify-center">
+
+  <div *ngIf="authService.userData as user"> 
+    {{user.email}}
+    {{user.first_name}}
+  </div>
+  <table class="">
+
     <tbody
       class="grid content-center w-full gap-2 xl:grid-cols-4 md:grid-cols-3 lg:grid-cols-4 sm:grid-cols-1 sm:content-center"
     >

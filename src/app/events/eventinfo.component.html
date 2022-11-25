@@ -90,4 +90,15 @@
       <p>Update</p>
     </div>
   </button>
+
+
+  <!-- Event form component -->
+  <div *ngIf="UpdateBool">
+    <app-event-form
+      [editMode]="true"
+      [editableEvent]="event"
+      (createEvent)="updateEvent($event)"
+    ></app-event-form>
+  </div>
+
 </div>

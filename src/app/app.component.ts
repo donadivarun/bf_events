@@ -2,6 +2,9 @@ import { EventListComponent } from './events/event-list.component';
 import { Event } from './models/event';
 import { Component } from '@angular/core';
 import { EventService } from './events/event.service';
+import { AuthService } from './shared/services/auth.service';
+
+
 
 @Component({
   selector: 'app-root',
@@ -13,5 +16,5 @@ export class AppComponent {
   add = false;
   title = 'Bf events';
   events: Event[] = [];
-  constructor() {}
+  constructor(public authService: AuthService) {}
 }
