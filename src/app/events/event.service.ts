@@ -38,5 +38,8 @@ export class EventService {
     return this.httpClient.post<User>(`${this.url}/user`, user);
   }
 
+
+  
+
   private url: string = environment.url;
 }

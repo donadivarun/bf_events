@@ -7,6 +7,7 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import * as firebase from 'firebase/compat';
 @Injectable({
   providedIn: 'root',
 })
@@ -71,7 +72,7 @@ export class AuthService {
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
     console.log(user);
-    console.log(user.uid);
+    //console.log(user.uid);
     //return user !== null && user.emailVerified !== false ? true : false;
     return user ? true : false;
   }
