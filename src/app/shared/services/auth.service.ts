@@ -8,7 +8,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 
-import * as firebase from 'firebase/compat';
+// import * as firebase from 'firebase/compat';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +26,7 @@ export class AuthService {
     this._token = '';
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
+
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
@@ -38,10 +39,15 @@ export class AuthService {
     });
   }
 
-  Token() {
-    {
-      return this._token;
+  get token() {
+    if (this._token == ''){
+      this._token = localStorage.getItem('userToken') || '';
     }
+    return this._token;
+  }
+  set token(token){
+    localStorage.setItem('userToken', token);
+    this._token = token
   }
   // Sign in with email/password
   SignIn(email: string, password: string) {
@@ -79,15 +85,17 @@ export class AuthService {
       });
   }
 
-  // Returns true when user is looged in and email is verified
+  // Returns true when user is logged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
+
+    // this.afAuth.user?.getIdToken().then((token) => (this._token = token));
     console.log(user);
     //return user !== null && user.emailVerified !== false ? true : false;
     return !!user;
   }
 
-  // Send email verfificaiton when new user sign up
+  // Send email verification when new user sign up
   SendVerificationMail() {
     return this.afAuth.currentUser
       .then((u: any) => u.sendEmailVerification())
@@ -118,7 +126,7 @@ export class AuthService {
     return this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
-        result.user?.getIdToken().then((token) => (this._token = token));
+        result.user?.getIdToken().then((token) => (this.token = token));
 
         this.router.navigate(['dashboard']);
         this.SetUserData(result.user);

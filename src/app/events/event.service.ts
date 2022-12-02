@@ -14,7 +14,7 @@ export class EventService {
   constructor(private httpClient: HttpClient, private auth: AuthService) {}
   buildHeaders() {
     return new HttpHeaders({
-      Authorization: 'Bearer' + this.auth.Token(), // continue to work here
+      Authorization: 'Bearer ' + this.auth.token, // continue to work here
     });
   }
 
@@ -23,7 +23,7 @@ export class EventService {
   }
 
   getEvents(): Observable<Event[]> {
-    return this.httpClient.get<Event[]>(`${this.url}/events`);
+    return this.httpClient.get<Event[]>(`${this.url}/events`, this.setHeader());
   }
 
   addEvent(event: Event): Observable<Event> {
