@@ -23,7 +23,7 @@ export class EventService {
   }
 
   updateEvent(event: Event): Observable<Event> {
-    console.log("updating event");
+    console.log('updating event');
     return this.httpClient.put<Event>(`${this.url}/event`, event);
   }
   getEvent(id: String): Observable<Event> {
@@ -31,13 +31,12 @@ export class EventService {
     return this.httpClient.get<Event>(`${this.url}/event/${id}`);
   }
   likeEvent(event: Event): Observable<Event> {
-  return this.httpClient.post<Event>(`${this.url}/event/like`, event);
-}
+    return this.httpClient.post<Event>(`${this.url}/event/like`, event);
+  }
 
-adduser(user: User): Observable<User> {
-  return this.httpClient.post<User>(`${this.url}/user`, user);
-}
+  adduser(user: User): Observable<User> {
+    return this.httpClient.post<User>(`${this.url}/user`, user);
+  }
 
   private url: string = environment.url;
-
 }

@@ -18,7 +18,7 @@ export class EventinfoComponent implements OnInit {
   edit = true;
   id = '';
   @Input()
-  event: Event = new Event('', '', '', '', '', 0, new Date(), '');
+  event: Event = new Event('', '', '', '', '', 0, new Date());
   descriptons: Descripton[] = [
     {
       content: 'Better,cooler,Cats!',
