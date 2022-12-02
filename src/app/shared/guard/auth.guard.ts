@@ -1,11 +1,6 @@
 import { Injectable } from '@angular/core';
-import {
-  CanActivate,
-  ActivatedRouteSnapshot,
-  RouterStateSnapshot,
-  Router,
-} from '@angular/router';
-import { AuthService } from '../../shared/services/auth.service';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { AuthService } from "../services/auth.service";
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
@@ -17,7 +12,7 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.authService.isLoggedIn !== true) {
+    if (this.authService && !this.authService.isLoggedIn) {
       console.log('you must sign in first');
       //this.router.navigate(['login'])
     }

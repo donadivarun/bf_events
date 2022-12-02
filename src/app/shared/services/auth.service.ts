@@ -17,13 +17,13 @@ export class AuthService {
   userData: any; // Save logged in user data
   _token: string; // User token
 
-
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
+    this._token = '';
     /* Saving user data in localstorage when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
@@ -38,8 +38,10 @@ export class AuthService {
     });
   }
 
-  Token(){
-    {return this._token}
+  Token() {
+    {
+      return this._token;
+    }
   }
   // Sign in with email/password
   SignIn(email: string, password: string) {
@@ -81,11 +83,6 @@ export class AuthService {
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
     console.log(user);
-<<<<<<< HEAD
-    //console.log(user.uid);
-=======
-    console.log(user);
->>>>>>> refs/remotes/origin/imgupload
     //return user !== null && user.emailVerified !== false ? true : false;
     return !!user;
   }
@@ -121,7 +118,7 @@ export class AuthService {
     return this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
-        result.user?.getIdToken().then(token => this._token = token);
+        result.user?.getIdToken().then((token) => (this._token = token));
 
         this.router.navigate(['dashboard']);
         this.SetUserData(result.user);
@@ -130,7 +127,6 @@ export class AuthService {
         window.alert(error);
       });
   }
-
 
   //TODO: Change variables
 
@@ -148,7 +144,6 @@ export class AuthService {
       first_name: user.displayName,
       last_name: user.displayName,
       //emailVerified: user.emailVerified,
-
     };
     console.log(userData);
     return userRef.set(userData, {
