@@ -4,12 +4,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
+import {AuthService} from "../shared/services/auth.service";
 
 @Injectable({
   providedIn: 'root',
 })
 export class EventService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private auth: AuthService) {}
+  buildHeaders(){
+    this.auth.Token();  // continue to work here
+  }
   getEvents(): Observable<Event[]> {
     return this.httpClient.get<Event[]>(`${this.url}/events`);
   }

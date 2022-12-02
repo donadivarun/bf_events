@@ -7,18 +7,23 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+// import firebase from "firebase/compat";
+// import {user} from "@angular/fire/auth";
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   userData: any; // Save logged in user data
+  _token: string; // User token
+
+
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
     public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
-    /* Saving user data in localstorage when 
+    /* Saving user data in localstorage when
     logged in and setting up null when logged out */
     this.afAuth.authState.subscribe((user) => {
       if (user) {
@@ -30,6 +35,10 @@ export class AuthService {
         JSON.parse(localStorage.getItem('user')!);
       }
     });
+  }
+
+  Token(){
+    {return this._token}
   }
   // Sign in with email/password
   SignIn(email: string, password: string) {
@@ -56,7 +65,7 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        /* Call the SendVerificaitonMail() function when new user sign 
+        /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
         this.SendVerificationMail();
         this.SetUserData(result.user);
@@ -71,9 +80,9 @@ export class AuthService {
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
     console.log(user);
-    console.log(user.uid);
+    console.log(user);
     //return user !== null && user.emailVerified !== false ? true : false;
-    return user ? true : false;
+    return !!user;
   }
 
   // Send email verfificaiton when new user sign up
@@ -98,7 +107,7 @@ export class AuthService {
 
   // Sign in with Google
   GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
+    return this.AuthLogin(new auth.GoogleAuthProvider()).then(() => {
       this.router.navigate(['dashboard']);
     });
   }
@@ -107,6 +116,8 @@ export class AuthService {
     return this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
+        result.user?.getIdToken().then(token => this._token = token);
+
         this.router.navigate(['dashboard']);
         this.SetUserData(result.user);
       })
@@ -114,10 +125,12 @@ export class AuthService {
         window.alert(error);
       });
   }
+
+
   //TODO: Change variables
 
-  /* Setting up user data when sign in with username/password, 
-  sign up with username/password and sign in with social auth  
+  /* Setting up user data when sign in with username/password,
+  sign up with username/password and sign in with social auth
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   SetUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
@@ -130,6 +143,7 @@ export class AuthService {
       first_name: user.displayName,
       last_name: user.displayName,
       //emailVerified: user.emailVerified,
+
     };
     console.log(userData);
     return userRef.set(userData, {
@@ -144,4 +158,17 @@ export class AuthService {
       this.router.navigate(['login']);
     });
   }
+  // get_auth(){
+  //   this.afAuth.currentUser
+  //
+  //   if (firebase.auth().currentUser) {
+  //
+  //     this.afAuth.currentUser.getIdToken(/* forceRefresh */ true).then(function (idToken) {
+  //       // Send token to your backend via HTTPS
+  //       // ...
+  //     }).catch(function (error) {
+  //       // Handle error
+  //     });
+  //   }
+  // }
 }
