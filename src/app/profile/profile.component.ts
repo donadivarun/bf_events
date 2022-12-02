@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Event } from '../models/event';
-
+//import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-profile',
