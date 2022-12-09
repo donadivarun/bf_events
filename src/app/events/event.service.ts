@@ -27,6 +27,7 @@ export class EventService {
   }
 
   addEvent(event: Event): Observable<Event> {
+    console.log(event);
     return this.httpClient.post<Event>(`${this.url}/events`, event);
   }
 
