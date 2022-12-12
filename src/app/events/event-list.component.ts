@@ -5,6 +5,7 @@ import { Event } from '../models/event';
 import { EventService } from './event.service';
 import { AuthService } from '../shared/services/auth.service';
 import { User } from '../models/user.model';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-event-list',
@@ -13,6 +14,8 @@ import { User } from '../models/user.model';
 })
 export class EventListComponent implements OnInit {
   add = true;
+
+  userLiked = false;
 
   @Input()
   events!: Event[];
@@ -89,7 +92,8 @@ export class EventListComponent implements OnInit {
         catchError((err) => {
           this.showError(err);
           return of({});
-        })
+        }),
+        tap(() => this.toogleUserLikedEvent(event))
       )
       .subscribe(() => this.getEvents());
   }
@@ -99,5 +103,12 @@ export class EventListComponent implements OnInit {
   }
   trackEvent(i: number, event: Event): string {
     return event.id;
+  }
+  toogleUserLikedEvent(event: Event) {
+    if (event.isLiked === true) {
+      this.userLiked = true;
+    } else {
+      this.userLiked = false;
+    }
   }
 }
