@@ -28,7 +28,11 @@ export class EventService {
 
   addEvent(event: Event): Observable<Event> {
     console.log(event);
-    return this.httpClient.post<Event>(`${this.url}/events`, event);
+    return this.httpClient.post<Event>(
+      `${this.url}/events`,
+      event,
+      this.setHeader()
+    );
   }
 
   deleteEvent(event: Event): Observable<any> {
@@ -40,14 +44,25 @@ export class EventService {
 
   updateEvent(event: Event): Observable<Event> {
     console.log('updating event');
-    return this.httpClient.put<Event>(`${this.url}/event`, event);
+    return this.httpClient.put<Event>(
+      `${this.url}/event`,
+      event,
+      this.setHeader()
+    );
   }
   getEvent(id: String): Observable<Event> {
     console.log('calling network');
-    return this.httpClient.get<Event>(`${this.url}/event/${id}`);
+    return this.httpClient.get<Event>(
+      `${this.url}/event/${id}`,
+      this.setHeader()
+    );
   }
   likeEvent(event: Event): Observable<Event> {
-    return this.httpClient.post<Event>(`${this.url}/event/like`, event);
+    return this.httpClient.post<Event>(
+      `${this.url}/event/like`,
+      event,
+      this.setHeader()
+    );
   }
 
   adduser(user: User): Observable<User> {

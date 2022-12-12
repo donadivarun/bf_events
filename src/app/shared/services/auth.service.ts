@@ -40,14 +40,14 @@ export class AuthService {
   }
 
   get token() {
-    if (this._token == ''){
+    if (this._token == '') {
       this._token = localStorage.getItem('userToken') || '';
     }
     return this._token;
   }
-  set token(token){
+  set token(token) {
     localStorage.setItem('userToken', token);
-    this._token = token
+    this._token = token;
   }
   // Sign in with email/password
   SignIn(email: string, password: string) {
@@ -90,7 +90,7 @@ export class AuthService {
     const user = JSON.parse(localStorage.getItem('user')!);
 
     // this.afAuth.user?.getIdToken().then((token) => (this._token = token));
-    console.log(user);
+    // console.log(user);
     //return user !== null && user.emailVerified !== false ? true : false;
     return !!user;
   }
@@ -153,7 +153,7 @@ export class AuthService {
       last_name: user.displayName,
       //emailVerified: user.emailVerified,
     };
-    console.log(userData);
+    //console.log(userData);
     return userRef.set(userData, {
       merge: true,
     });
