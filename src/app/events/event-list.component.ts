@@ -102,7 +102,12 @@ export class EventListComponent implements OnInit {
   trackEvent(i: number, event: Event): string {
     return event.id;
   }
-  toogleUserLikedEvent() {
-    this.isLiked = !this.isLiked;
+  toogleUserLikedEvent(event: Event) {
+    this.getEvents();
+    if (event.isLiked == true) {
+      this.isLiked == true;
+    } else {
+      this.isLiked == false;
+    }
   }
 }
