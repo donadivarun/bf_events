@@ -14,6 +14,8 @@ import { User } from '../models/user.model';
 export class EventListComponent implements OnInit {
   add = true;
 
+  isLiked = false;
+
   @Input()
   events!: Event[];
   errorMessage = '';
@@ -99,5 +101,8 @@ export class EventListComponent implements OnInit {
   }
   trackEvent(i: number, event: Event): string {
     return event.id;
+  }
+  toogleUserLikedEvent() {
+    this.isLiked = !this.isLiked;
   }
 }

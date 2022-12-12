@@ -81,9 +81,15 @@
               </div>
             </a>
             <div
-              class="float-right text-xl xl:text-xl md:text-lg sm:text-xl lg:text-lg"
+              (click)="toogleUserLikedEvent()"
+              [ngClass]="
+                isLiked
+                  ? 'float-right text-xl xl:text-xl md:text-lg sm:text-xl lg:text-lg text-black'
+                  : 'float-right text-xl xl:text-xl md:text-lg sm:text-xl lg:text-lg text-blue-300'
+              "
+              class="justify-self-center"
             >
-              <td class="justify-self-center">
+              <td>
                 {{ event.likes }}
                 <mat-icon (click)="likeEvent(event)">thumb_up</mat-icon>
               </td>

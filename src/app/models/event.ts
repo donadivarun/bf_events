@@ -6,6 +6,7 @@ export class Event {
     public location: string,
     public image: string,
     public likes: number,
-    public date: Date
+    public date: Date,
+    public isliked: number
   ) {}
 }
