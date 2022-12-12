@@ -3,11 +3,13 @@
   <div>
     <div
       [ngClass]="
-        add ? 'hidden' : 'absolute my-4 z-40 w-full h-full bg-white/75 '
+        add
+          ? 'hidden'
+          : 'absolute my-4 z-40 w-full h-full bg-white/75 dark:bg-black/75'
       "
     >
       <div
-        class="flex items-center justify-center w-12 h-12 ml-12 text-white bg-blue-400 rounded-full hover:bg-sky-700"
+        class="flex items-center justify-center w-12 h-12 ml-12 text-white bg-blue-400 rounded-full hover:bg-sky-700 dark:hover:bg-gray-900 dark:bg-gray-800"
       >
         <button (click)="add = !add">
           <div class="flex items-center justify-center h-12">
@@ -21,7 +23,7 @@
     </div>
     <button
       (click)="add = !add"
-      class="flex items-center justify-center w-12 h-12 mt-3 ml-12 text-white duration-75 bg-blue-400 rounded-full hover:bg-sky-700"
+      class="flex items-center justify-center w-12 h-12 mt-3 ml-12 text-white duration-75 bg-blue-400 rounded-full hover:bg-sky-700 dark:hover:bg-gray-900 dark:bg-gray-800"
     >
       <div class="flex items-center justify-center h-12">
         <mat-icon>add</mat-icon>
@@ -39,7 +41,7 @@
       >
         <!-- Event tile -->
         <div
-          class="flex 2xl:h-[480px] xl:h-[460px] lg:h-[380px] md:h-[380px] sm:h-[480px] p-12 duration-300 bg-white shadow-2xl w-[350px] rounded-xl hover:scale-105"
+          class="flex 2xl:h-[480px] xl:h-[460px] lg:h-[380px] md:h-[380px] sm:h-[480px] p-12 duration-300 bg-white shadow-2xl w-[350px] rounded-xl hover:scale-105 dark:bg-gray-800 dark:text-white"
         >
           <div>
             <a [routerLink]="['/info/' + event.id]">
@@ -52,7 +54,7 @@
               </div>
               <div class="pb-1">
                 <td class="xl:text-sm md:text-xs sm:text-sm lg:text-xs">
-                  22.10.2022 {{ event.date | date: "mediumDate" }} from test
+                  22.10.2022 {{ event.date | date : "mediumDate" }} from test
                   user
                 </td>
               </div>
@@ -63,7 +65,7 @@
                 <td class="shadow-lg">
                   <img
                     src="{{
-                      event.image | noImage: '../assets/img/catIcon.png'
+                      event.image | noImage : '../assets/img/catIcon.png'
                     }}"
                     alt="{{ event.title + ' book cover' }}"
                   />
