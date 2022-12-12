@@ -9,7 +9,7 @@
       "
     >
       <div
-        class="flex items-center justify-center w-12 h-12 ml-12 text-white bg-blue-400 rounded-full hover:bg-sky-700 dark:hover:bg-gray-900 dark:bg-gray-800"
+        class="flex items-center justify-center w-12 h-12 ml-12 text-white bg-blue-400 rounded-full hover:bg-sky-700 dark:hover:bg-gray-900 dark:bg-blue-700"
       >
         <button (click)="add = !add">
           <div class="flex items-center justify-center h-12">
@@ -23,7 +23,7 @@
     </div>
     <button
       (click)="add = !add"
-      class="flex items-center justify-center w-12 h-12 mt-3 ml-12 text-white duration-75 bg-blue-400 rounded-full hover:bg-sky-700 dark:hover:bg-gray-900 dark:bg-gray-800"
+      class="flex items-center justify-center w-12 h-12 mt-3 ml-12 text-white duration-75 bg-blue-400 rounded-full hover:bg-sky-700 dark:hover:bg-gray-900 dark:bg-blue-700"
     >
       <div class="flex items-center justify-center h-12">
         <mat-icon>add</mat-icon>
@@ -84,8 +84,8 @@
               (click)="toogleUserLikedEvent(event)"
               [ngClass]="
                 isLiked
-                  ? 'float-right text-xl xl:text-xl md:text-lg sm:text-xl lg:text-lg text-blue-300'
-                  : 'float-right text-xl xl:text-xl md:text-lg sm:text-xl lg:text-lg text-black'
+                  ? 'float-right text-xl xl:text-xl md:text-lg sm:text-xl lg:text-lg dark:text-blue-600 text-blue-300'
+                  : 'float-right text-xl xl:text-xl md:text-lg sm:text-xl lg:text-lg dark:text-white text-black'
               "
               class="justify-self-center"
             >
