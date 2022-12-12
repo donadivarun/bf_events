@@ -82,14 +82,16 @@
             </a>
             <div
               (click)="toogleUserLikedEvent(event)"
-              [ngClass]="
-                isLiked
-                  ? 'float-right text-xl xl:text-xl md:text-lg sm:text-xl lg:text-lg dark:text-blue-600 text-blue-300'
-                  : 'float-right text-xl xl:text-xl md:text-lg sm:text-xl lg:text-lg dark:text-white text-black'
-              "
+              [ngClass]="{
+                'flex float-right  dark:text-white text-black': !event.isLiked,
+                'flex float-right  dark:text-blue-600 text-blue-300':
+                  event.isLiked
+              }"
               class="justify-self-center"
             >
-              <td>
+              <td
+                class="flex float-right text-xl xl:text-xl md:text-lg sm:text-xl lg:text-lg"
+              >
                 {{ event.likes }}
                 <mat-icon (click)="likeEvent(event)">thumb_up</mat-icon>
               </td>
