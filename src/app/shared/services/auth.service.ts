@@ -1,4 +1,6 @@
-import { Injectable, NgZone } from '@angular/core';
+import { first, Observable } from 'rxjs';
+//import { EventService } from './../../events/event.service';
+import { Injectable, Injector, NgZone } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import * as auth from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -7,6 +9,8 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
+import { EventService } from 'src/app/events/event.service';
+import { catchError, of } from 'rxjs';
 
 // import * as firebase from 'firebase/compat';
 
@@ -16,12 +20,13 @@ import { Router } from '@angular/router';
 export class AuthService {
   userData: any; // Save logged in user data
   _token: string; // User token
-
+  errorMessage = '';
   constructor(
     public afs: AngularFirestore, // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
     public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    private injector: Injector
   ) {
     this._token = '';
     /* Saving user data in localstorage when
@@ -49,9 +54,17 @@ export class AuthService {
     localStorage.setItem('userToken', token);
     this._token = token
   }
+
+  showError(error: any): void {
+    this.errorMessage = error.message
+      ? error.message
+      : error.status
+      ? `${error.status} - ${error.statusText}`
+      : 'Server error';
+  }
+
   // Sign in with email/password
   SignIn(email: string, password: string) {
-    console.log(email, password);
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
@@ -68,7 +81,7 @@ export class AuthService {
       });
   }
   // Sign up with email/password
-  SignUp(email: string, password: string) {
+  SignUp(email: string, password: string, fname: string, lname: string) {
     console.log(email);
     console.log(password);
     return this.afAuth
@@ -77,7 +90,8 @@ export class AuthService {
         /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
         this.SendVerificationMail();
-        this.SetUserData(result.user);
+        //this.SetUserData(result.user);
+        this.addUser(new User(result.user?.uid, email, fname, lname, result.user?.uid));
         console.log(result.user);
       })
       .catch((error) => {
@@ -90,7 +104,6 @@ export class AuthService {
     const user = JSON.parse(localStorage.getItem('user')!);
 
     // this.afAuth.user?.getIdToken().then((token) => (this._token = token));
-    console.log(user);
     //return user !== null && user.emailVerified !== false ? true : false;
     return !!user;
   }
@@ -121,13 +134,13 @@ export class AuthService {
       this.router.navigate(['dashboard']);
     });
   }
+
   // Auth logic to run auth providers
   AuthLogin(provider: any) {
     return this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
         result.user?.getIdToken().then((token) => (this.token = token));
-
         this.router.navigate(['dashboard']);
         this.SetUserData(result.user);
       })
@@ -145,18 +158,38 @@ export class AuthService {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
+    const uName: String = user.displayName
+    let fname = " ";
+    let lname = '';
+    if (uName) {
+      fname = uName.split(" ")[0];
+      lname = uName.split(" ")[1];
+    }
     const userData: User = {
       uid: user.uid,
       email: user.email,
-      username: user.displayName,
-      first_name: user.displayName,
-      last_name: user.displayName,
+      username: user.uid,
+      first_name: fname,
+      last_name: lname,
       //emailVerified: user.emailVerified,
     };
-    console.log(userData);
+    this.addUser(userData);
     return userRef.set(userData, {
       merge: true,
     });
+  }
+  addUser(user: User): void {
+    console.log(user)
+    const eventService = this.injector.get<EventService>(EventService)
+    eventService
+      .adduser(user)
+      .pipe(
+        catchError((err) => {
+          this.showError(err);
+          return of({});
+        })
+      )
+      .subscribe(() => eventService.getEvents());
   }
   // Sign out
   SignOut() {

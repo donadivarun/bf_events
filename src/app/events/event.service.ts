@@ -28,7 +28,7 @@ export class EventService {
 
   addEvent(event: Event): Observable<Event> {
     console.log(event);
-    return this.httpClient.post<Event>(`${this.url}/events`, event);
+    return this.httpClient.post<Event>(`${this.url}/events`, event, this.setHeader());
   }
 
   deleteEvent(event: Event): Observable<any> {
@@ -51,6 +51,8 @@ export class EventService {
   }
 
   adduser(user: User): Observable<User> {
+    console.log("adding user in events file");
+    console.log(user);
     return this.httpClient.post<User>(`${this.url}/user`, user);
   }
 
