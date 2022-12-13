@@ -76,7 +76,10 @@
           </thead>
           <!--TODO: Fill in event infos-->
           <tbody>
-            <tr class="w-full max-h-[540px] flex justify-center">
+            <tr
+              *ngFor="let event of events; trackBy: trackEvent"
+              class="w-full max-h-[540px] flex justify-center"
+            >
               <div
                 class="flex w-full h-20 p-3 duration-300 bg-white rounded-md shadow-2xl dark:bg-gray-800 hover:scale-95"
               >
@@ -112,7 +115,10 @@
           </thead>
           <!--TODO: Fill in event infos-->
           <tbody>
-            <tr class="w-full max-h-[540px] flex justify-center">
+            <tr
+              *ngFor="let event of events; trackBy: trackEvent"
+              class="w-full max-h-[540px] flex justify-center"
+            >
               <div
                 class="flex w-full h-20 p-3 duration-300 bg-white rounded-md shadow-2xl dark:bg-gray-800 hover:scale-95"
               >
@@ -147,7 +153,10 @@
           </thead>
           <!--TODO: Fill in event infos-->
           <tbody>
-            <tr class="w-full max-h-[540px] flex justify-center">
+            <tr
+              *ngFor="let event of events; trackBy: trackEvent"
+              class="w-full max-h-[540px] flex justify-center"
+            >
               <div
                 class="flex w-full h-20 p-3 duration-300 bg-white rounded-md shadow-2xl dark:bg-gray-800 hover:scale-95"
               >

@@ -8,8 +8,6 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 
-// import * as firebase from 'firebase/compat';
-
 @Injectable({
   providedIn: 'root',
 })
