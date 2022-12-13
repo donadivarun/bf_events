@@ -104,6 +104,7 @@ export class EventListComponent implements OnInit {
   trackEvent(i: number, event: Event): string {
     return event.id;
   }
+  
   toogleUserLikedEvent(event: Event) {
     if (event.isLiked === true) {
       this.userLiked = true;

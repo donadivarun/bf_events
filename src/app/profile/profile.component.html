@@ -77,7 +77,7 @@
           <!--TODO: Fill in event infos-->
           <tbody>
             <tr
-              *ngFor="let event of events; trackBy: trackEvent"
+              *ngFor="let event of eventsOwn; trackBy: trackEvent"
               class="w-full max-h-[540px] flex justify-center"
             >
               <div
@@ -116,7 +116,7 @@
           <!--TODO: Fill in event infos-->
           <tbody>
             <tr
-              *ngFor="let event of events; trackBy: trackEvent"
+              *ngFor="let event of eventsLiked; trackBy: trackEvent"
               class="w-full max-h-[540px] flex justify-center"
             >
               <div
@@ -153,10 +153,7 @@
           </thead>
           <!--TODO: Fill in event infos-->
           <tbody>
-            <tr
-              *ngFor="let event of events; trackBy: trackEvent"
-              class="w-full max-h-[540px] flex justify-center"
-            >
+            <tr class="w-full max-h-[540px] flex justify-center">
               <div
                 class="flex w-full h-20 p-3 duration-300 bg-white rounded-md shadow-2xl dark:bg-gray-800 hover:scale-95"
               >
