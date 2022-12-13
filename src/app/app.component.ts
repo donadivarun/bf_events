@@ -23,4 +23,12 @@ export class AppComponent {
   add = false;
   title = 'Bf events';
   events: Event[] = [];
+
+  // Global dark mode state
+  isDarkEnable = false;
+
+  // Method to toggle dark mode
+  public toggleDarkMode() {
+    this.isDarkEnable = !this.isDarkEnable;
+  }
 }

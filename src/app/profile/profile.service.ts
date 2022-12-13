@@ -10,8 +10,10 @@ import { HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
-export class EventService {
+export class ProfileService {
   constructor(private httpClient: HttpClient, private auth: AuthService) {}
+
+  
   buildHeaders() {
     return new HttpHeaders({
       Authorization: 'Bearer ' + this.auth.token, // continue to work here
@@ -22,34 +24,6 @@ export class EventService {
     return { headers: this.buildHeaders() };
   }
 
-  getEvents(): Observable<Event[]> {
-    return this.httpClient.get<Event[]>(`${this.url}/events`, this.setHeader());
-  }
-
-  addEvent(event: Event): Observable<Event> {
-    console.log(event);
-    return this.httpClient.post<Event>(
-      `${this.url}/events`,
-      event,
-      this.setHeader()
-    );
-  }
-
-  deleteEvent(event: Event): Observable<any> {
-    return this.httpClient.delete<any>(
-      `${this.url}/event/${event.id}`,
-      this.setHeader()
-    );
-  }
-
-  updateEvent(event: Event): Observable<Event> {
-    console.log('updating event');
-    return this.httpClient.put<Event>(
-      `${this.url}/event`,
-      event,
-      this.setHeader()
-    );
-  }
   getEvent(id: String): Observable<Event> {
     console.log('calling network');
     return this.httpClient.get<Event>(
@@ -57,16 +31,21 @@ export class EventService {
       this.setHeader()
     );
   }
-  likeEvent(event: Event): Observable<Event> {
-    return this.httpClient.post<Event>(
-      `${this.url}/event/like`,
+
+  getOwnEvents(event: Event): Observable<Event> {
+    return this.httpClient.put<Event>(
+      `${this.url}/profile/created_events`,
       event,
       this.setHeader()
     );
   }
 
-  adduser(user: User): Observable<User> {
-    return this.httpClient.post<User>(`${this.url}/user`, user);
+  getLikedEvents(event: Event): Observable<Event> {
+    return this.httpClient.put<Event>(
+      `${this.url}/profile/liked_events`,
+      event,
+      this.setHeader()
+    );
   }
 
   private url: string = environment.url;
