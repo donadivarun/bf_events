@@ -81,22 +81,27 @@
               class="w-full max-h-[540px] flex justify-center"
             >
               <div
-                class="flex w-full h-20 p-3 duration-300 bg-white rounded-md shadow-2xl dark:bg-gray-800 hover:scale-95"
+                class="flex w-full h-20 p-3 duration-300 bg-white rounded-md shadow-2xl dark:bg-gray-900 hover:scale-95"
               >
-                <div class="grid grid-cols-3">
+                <a
+                  [routerLink]="['/info/' + event.id]"
+                  class="grid grid-cols-3"
+                >
                   <td class="h-14">
                     <img
                       class="items-center justify-center rounded-full h-14 w-14"
-                      src="../../assets/img/CatWithGlasses.jpeg"
-                      alt=""
+                      src="{{
+                        event.image | noImage : '../assets/img/catIcon.png'
+                      }}"
+                      alt="{{ event.title }}"
                     />
                   </td>
                   <td
                     class="flex items-center self-center justify-center col-span-2"
                   >
-                    <p class="text-lg">Event title placeholder</p>
+                    <p class="text-lg">{{ event.title }}</p>
                   </td>
-                </div>
+                </a>
               </div>
             </tr>
           </tbody>
@@ -120,22 +125,27 @@
               class="w-full max-h-[540px] flex justify-center"
             >
               <div
-                class="flex w-full h-20 p-3 duration-300 bg-white rounded-md shadow-2xl dark:bg-gray-800 hover:scale-95"
+                class="flex w-full h-20 p-3 duration-300 bg-white rounded-md shadow-2xl dark:bg-gray-900 hover:scale-95"
               >
-                <div class="grid grid-cols-3">
+                <a
+                  [routerLink]="['/info/' + event.id]"
+                  class="grid grid-cols-3"
+                >
                   <td class="h-14">
                     <img
+                      src="{{
+                        event.image | noImage : '../assets/img/catIcon.png'
+                      }}"
+                      alt="{{ event.title }}"
                       class="items-center justify-center rounded-full h-14 w-14"
-                      src="../../assets/img/CatWithGlasses.jpeg"
-                      alt=""
                     />
                   </td>
                   <td
                     class="flex items-center self-center justify-center col-span-2"
                   >
-                    <p class="self-center text-lg">Event title placeholder</p>
+                    <p class="self-center text-lg">{{ event.title }}</p>
                   </td>
-                </div>
+                </a>
               </div>
             </tr>
           </tbody>
@@ -155,7 +165,7 @@
           <tbody>
             <tr class="w-full max-h-[540px] flex justify-center">
               <div
-                class="flex w-full h-20 p-3 duration-300 bg-white rounded-md shadow-2xl dark:bg-gray-800 hover:scale-95"
+                class="flex w-full h-20 p-3 duration-300 bg-white rounded-md shadow-2xl dark:bg-gray-900 hover:scale-95"
               >
                 <div class="grid grid-cols-3">
                   <td class="h-14">

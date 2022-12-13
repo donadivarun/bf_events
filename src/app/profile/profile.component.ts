@@ -3,6 +3,7 @@ import { Event } from '../models/event';
 import { AuthService } from '../shared/services/auth.service';
 import { ProfileService } from './profile.service';
 import { catchError, of } from 'rxjs';
+import { NoImagePipe } from '../shared/pipes/no-image.pipe';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',

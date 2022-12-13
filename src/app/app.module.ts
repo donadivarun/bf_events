@@ -18,16 +18,17 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AuthService } from './shared/services/auth.service';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalenderComponent,
     LoginComponent,
-    ProfileComponent,
     SignUpComponent,
   ],
   imports: [
+    ProfileModule,
     AngularFireAuthModule,
     BrowserModule,
     MatIconModule,
