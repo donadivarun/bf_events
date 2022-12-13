@@ -22,7 +22,6 @@
     "@angular/router": "^14.2.0",
     "@firebase/app-compat": "^0.1.39",
     "@popperjs/core": "2.9.1",
-    
     "rxjs": "~7.5.0",
     "tailwind": "^4.0.0",
     "tslib": "^2.3.0",
