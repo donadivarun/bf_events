@@ -28,6 +28,7 @@
             "scripts": []
           },
           "configurations": {
+            "aot": true,
             "production": {
               "budgets": [
                 {
