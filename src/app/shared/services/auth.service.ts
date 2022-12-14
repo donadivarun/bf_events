@@ -171,6 +171,7 @@ export class AuthService {
       last_name: lname,
       //emailVerified: user.emailVerified,
     };
+    console.log(userData);
     this.addUser(userData);
 
     return userRef.set(userData, {
