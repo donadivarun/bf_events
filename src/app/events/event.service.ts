@@ -66,6 +66,8 @@ export class EventService {
   }
 
   adduser(user: User): Observable<User> {
+    console.log("adding user in events file");
+    console.log(user);
     return this.httpClient.post<User>(`${this.url}/user`, user);
   }
 
