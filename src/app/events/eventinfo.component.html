@@ -37,58 +37,58 @@
         <!-- Event description -->
         <div>
           <p
-            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start"
+            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start dark:text-white"
           >
             Description:
           </p>
-          <p>
+          <p class="dark:text-white">
             {{ event.description }}
           </p>
         </div>
         <!-- Event infos -->
         <div>
           <p
-            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start"
+            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start dark:text-white"
           >
             Location:
           </p>
-          <p>
+          <p class="dark:text-white">
             {{ event.location }}
           </p>
         </div>
         <div>
           <p
-            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start"
+            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start dark:text-white"
           >
             Date:
           </p>
-          <p>
+          <p class="dark:text-white">
             {{ event.date | date : "short" }}
           </p>
         </div>
         <div>
           <p
-            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start"
+            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start dark:text-white"
           >
             Likes:
           </p>
-          <p>
+          <p class="dark:text-white">
             {{ event.likes }}
           </p>
         </div>
       </div>
 
       <!-- Fill it comments-->
-      <table class="w-full">
+      <table class="w-full rounded-md">
         <thead>
-          <th class="p-6 text-white bg-blue-500 dark:bg-blue-700">
+          <th class="p-6 text-white bg-blue-500 rounded-t-md dark:bg-blue-700">
             <p>Comments</p>
           </th>
         </thead>
         <tbody>
           <tr class="w-full max-h-[540px] flex justify-center">
             <div
-              class="flex w-full h-20 p-3 duration-300 bg-white rounded-md shadow-2xl dark:bg-gray-900"
+              class="flex w-full h-20 p-3 duration-300 bg-white shadow-2xl rounded-b-md dark:bg-gray-900"
             >
               <a [routerLink]="[]" class="grid grid-cols-3">
                 <td
@@ -103,6 +103,40 @@
           </tr>
         </tbody>
       </table>
+      <div>
+        <!-- write a comment  -->
+        <form #eventForm="ngForm" class="flex justify-center p-6">
+          <div>
+            <label class="dark:text-white"
+              >Write a comment:
+              <input
+                type="text"
+                required
+                name="commenttitle"
+                #commenttitle="ngModel"
+                [(ngModel)]="comment.u_comment"
+                class="dark:text-white flex px-[13px] py-3 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full"
+              />
+            </label>
+            <button
+              type="submit"
+              class="bg-blue-400 rounded-lg m-4 w-[130px] h-7 text-white hover:bg-sky-700"
+            >
+              <p>Enter</p>
+            </button>
+            <div class="text-red-500">
+              <div
+                *ngIf="!(comment.u_comment || commenttitle.pristine)"
+                class="alert alert-danger"
+              >
+                <div *ngIf="commenttitle.errors?.['required']">
+                  Comment cannot be empty!
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>
