@@ -6,7 +6,6 @@ import { EventService } from './event.service';
 import { AuthService } from '../shared/services/auth.service';
 import { User } from '../models/user.model';
 import { tap } from 'rxjs/operators';
-
 @Component({
   selector: 'app-event-list',
   templateUrl: './event-list.component.html',
@@ -104,7 +103,7 @@ export class EventListComponent implements OnInit {
   trackEvent(i: number, event: Event): string {
     return event.id;
   }
-  
+
   toogleUserLikedEvent(event: Event) {
     if (event.isLiked === true) {
       this.userLiked = true;

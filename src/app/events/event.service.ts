@@ -1,3 +1,4 @@
+import { Comment } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Event } from '../models/event';
 import { HttpClient } from '@angular/common/http';
@@ -69,5 +70,20 @@ export class EventService {
     return this.httpClient.post<User>(`${this.url}/user`, user);
   }
 
+  getComment(id: String): Observable<Event> {
+    return this.httpClient.get<Event>(
+      `${this.url}/comments/${id}`,
+      this.setHeader()
+    );
+  }
+
+  addCommment(comment: Comment): Observable<Comment> {
+    console.log(comment);
+    return this.httpClient.post<Comment>(
+      `${this.url}/events`,
+      comment,
+      this.setHeader()
+    );
+  }
   private url: string = environment.url;
 }
