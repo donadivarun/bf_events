@@ -1,3 +1,4 @@
+import { Comment } from './../models/comment.model';
 import { EventListComponent } from './event-list.component';
 import { EventFormComponent } from './../events/event-form.component';
 import { Event } from './../models/event';
@@ -19,6 +20,7 @@ export class EventinfoComponent implements OnInit {
   id = '';
   @Input()
   event: Event = new Event('', '', '', '', '', 0, new Date(), false);
+  comment: Comment = new Comment('', '', '', '', new Date());
   descriptons: Descripton[] = [
     {
       content: 'Better,cooler,Cats!',
@@ -48,6 +50,18 @@ export class EventinfoComponent implements OnInit {
       this.getEvent();
       console.log('loaded ' + this.id);
     }
+  }
+
+  getComment(): void {
+    this.eventService
+      .getComment(this.id)
+      .pipe(
+        catchError((err) => {
+          this.showError(err);
+          return of();
+        })
+      )
+      .subscribe((event) => (this.event = event));
   }
   getEvent(): void {
     this.eventService

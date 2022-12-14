@@ -25,78 +25,151 @@
   <h1 class="flex justify-center p-3 m-3 text-3xl border-b-2 border-stone-400">
     Infos for {{ event.title }}
   </h1>
+  <div>
+    <!-- Event image -->
+    <img
+      class="flex float-left mx-8 rounded-lg shadow-md xl:min-h-[200px] xl:min-w-[200px] xl:max-w-[250px] xl:max-h-[250px] sm:min-h-[200px] sm:min-w-[200px] sm:max-w-[250px] sm:max-h-[250px] md:min-h-[150px] md:min-w-[150px] md:max-w-[200px] lg:min-h-[150px] lg:min-w-[150px] lg:max-w-[200px] lg:max-h-[200px]"
+      src="{{ event.image | noImage : '../assets/img/CatWithGlasses.jpeg' }}"
+    />
 
-  <!-- Event image -->
-  <img
-    class="flex float-left max-w-sm mx-8 rounded-lg shadow-md max-h-64"
-    src="{{ event.image | noImage: '../assets/img/CatWithGlasses.jpeg' }}"
-  />
-
-  <div class="text-center text-black lg:text-left">
-    <div class="py-10 mx-6 text-center md:text-left">
+    <div class="py-10 mx-6 text-center text-black lg:text-left md:text-left">
       <div class="grid gap-8 grid-1 md:grid-cols-2 lg:grid-cols-4">
         <!-- Event description -->
-        <div class="">
+        <div>
           <p
-            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start"
+            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start dark:text-white"
           >
             Description:
           </p>
-          <p>
+          <p class="dark:text-white">
             {{ event.description }}
           </p>
         </div>
         <!-- Event infos -->
-        <div class="float-right">
-          <h6
-            class="flex justify-center mb-4 font-semibold uppercase md:justify-start"
+        <div>
+          <p
+            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start dark:text-white"
           >
-            Other Infos
-          </h6>
-          <p class="flex items-center justify-center mb-4 md:justify-start">
-            Location: {{ event.location }}
+            Location:
           </p>
-          <p class="flex items-center justify-center mb-4 md:justify-start">
-            Date: placeholder
-          </p>
-          <p class="flex items-center justify-center mb-4 md:justify-start">
-            Likes: {{ event.likes }}
+          <p class="dark:text-white">
+            {{ event.location }}
           </p>
         </div>
+        <div>
+          <p
+            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start dark:text-white"
+          >
+            Date:
+          </p>
+          <p class="dark:text-white">
+            {{ event.date | date : "short" }}
+          </p>
+        </div>
+        <div>
+          <p
+            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start dark:text-white"
+          >
+            Likes:
+          </p>
+          <p class="dark:text-white">
+            {{ event.likes }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Fill it comments-->
+      <table class="w-full rounded-md">
+        <thead>
+          <th class="p-6 text-white bg-blue-500 rounded-t-md dark:bg-blue-700">
+            <p>Comments</p>
+          </th>
+        </thead>
+        <tbody>
+          <tr class="w-full max-h-[540px] flex justify-center">
+            <div
+              class="flex w-full h-20 p-3 duration-300 bg-white shadow-2xl rounded-b-md dark:bg-gray-900"
+            >
+              <a [routerLink]="[]" class="grid grid-cols-3">
+                <td
+                  class="flex items-center self-center justify-center col-span-2"
+                >
+                  <p class="self-center text-lg">
+                    {{ comment.u_comment }}
+                  </p>
+                </td>
+              </a>
+            </div>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <!-- write a comment  -->
+        <form #eventForm="ngForm" class="flex justify-center p-6">
+          <div>
+            <label class="dark:text-white"
+              >Write a comment:
+              <input
+                type="text"
+                required
+                name="commenttitle"
+                #commenttitle="ngModel"
+                [(ngModel)]="comment.u_comment"
+                class="dark:text-white flex px-[13px] py-3 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full"
+              />
+            </label>
+            <button
+              type="submit"
+              class="bg-blue-400 rounded-lg m-4 w-[130px] h-7 text-white hover:bg-sky-700"
+            >
+              <p>Enter</p>
+            </button>
+            <div class="text-red-500">
+              <div
+                *ngIf="!(comment.u_comment || commenttitle.pristine)"
+                class="alert alert-danger"
+              >
+                <div *ngIf="commenttitle.errors?.['required']">
+                  Comment cannot be empty!
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </div>
-<!-- Update/edit event  -->
-<div class="flex justify-center p-6">
-  <!-- Event delete button -->
-  <a routerLink="">
+
+<!-- If User isn't the Owner, dont show this  -->
+<div>
+  <!-- Update/edit event  -->
+  <div class="flex justify-center p-6">
+    <!-- Event delete button -->
     <button
       type="button"
-      class="deletebtn bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700"
+      class="bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700"
       (click)="deleteEvent(event)"
     >
-      Delete
+      <p>Delete</p>
     </button>
-  </a>
 
-  <!-- Event form component -->
-  <button
-    (click)="setUpdateBool(true)"
-    (click)="edit = !edit"
-    class="bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700"
-  >
-    <div class="">
+    <!-- Event form component -->
+    <button
+      (click)="setUpdateBool(true)"
+      (click)="edit = !edit"
+      class="bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700"
+    >
       <p>Update</p>
-    </div>
-  </button>
+    </button>
 
-  <!-- Event form component -->
-  <div *ngIf="UpdateBool">
-    <app-event-form
-      [editMode]="true"
-      [editableEvent]="event"
-      (createEvent)="updateEvent($event)"
-    ></app-event-form>
+    <!-- Event form component -->
+    <div *ngIf="UpdateBool">
+      <app-event-form
+        [editMode]="true"
+        [editableEvent]="event"
+        (createEvent)="updateEvent($event)"
+      ></app-event-form>
+    </div>
   </div>
 </div>

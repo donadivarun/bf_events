@@ -3,13 +3,14 @@ import { Event } from '../models/event';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { User } from '../models/user.model';
 import { AuthService } from '../shared/services/auth.service';
 import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProfileService {
+export class CommentsService {
   constructor(private httpClient: HttpClient, private auth: AuthService) {}
   buildHeaders() {
     return new HttpHeaders({
@@ -21,16 +22,35 @@ export class ProfileService {
     return { headers: this.buildHeaders() };
   }
 
-  getOwnEvents(): Observable<Event[]> {
-    return this.httpClient.get<Event[]>(
-      `${this.url}/profile/created_events`,
+  addComment(event: Event): Observable<Event> {
+    console.log(event);
+    return this.httpClient.post<Event>(
+      `${this.url}/events`,
+      event,
       this.setHeader()
     );
   }
 
-  getLikedEvents(): Observable<Event[]> {
-    return this.httpClient.get<Event[]>(
-      `${this.url}/profile/liked_events`,
+  deleteComment(event: Event): Observable<any> {
+    return this.httpClient.delete<any>(
+      `${this.url}/event/${event.id}`,
+      this.setHeader()
+    );
+  }
+
+  updateComment(event: Event): Observable<Event> {
+    console.log('updating event');
+    return this.httpClient.put<Event>(
+      `${this.url}/event`,
+      event,
+      this.setHeader()
+    );
+  }
+
+  getComments(id: String): Observable<Event> {
+    console.log('calling network');
+    return this.httpClient.get<Event>(
+      `${this.url}/comments/${id}`,
       this.setHeader()
     );
   }
