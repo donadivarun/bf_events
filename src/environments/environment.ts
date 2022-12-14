@@ -12,8 +12,10 @@ export const environment = {
     messagingSenderId: '770702354128',
   },
   production: false,
-  //url: 'https://eventsapi-imz4zkkaqa-ew.a.run.app/api',
-  url : 'http://127.0.0.1:5000/api'
+
+  url: 'https://eventsapi-imz4zkkaqa-ew.a.run.app/api',
+  // url : 'http://127.0.0.1:5000/api'
+
 };
 
 /*

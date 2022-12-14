@@ -15,7 +15,7 @@ import {
   styleUrls: ['./event-form.component.css'],
 })
 export class EventFormComponent implements OnInit {
-  event: Event = new Event('', '', '', '', '', 0, new Date());
+  event: Event = new Event('', '', '', '', '', 0, new Date(), false);
   image: string = '';
 
   @Input() editMode!: boolean;

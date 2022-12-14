@@ -12,8 +12,6 @@ import { Router } from '@angular/router';
 import { EventService } from 'src/app/events/event.service';
 import { catchError, of } from 'rxjs';
 
-// import * as firebase from 'firebase/compat';
-
 @Injectable({
   providedIn: 'root',
 })
@@ -45,14 +43,14 @@ export class AuthService {
   }
 
   get token() {
-    if (this._token == ''){
+    if (this._token == '') {
       this._token = localStorage.getItem('userToken') || '';
     }
     return this._token;
   }
-  set token(token){
+  set token(token) {
     localStorage.setItem('userToken', token);
-    this._token = token
+    this._token = token;
   }
 
   showError(error: any): void {
@@ -130,9 +128,9 @@ export class AuthService {
 
   // Sign in with Google
   GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider()).then(() => {
-      this.router.navigate(['dashboard']);
-    });
+      return this.AuthLogin(new auth.GoogleAuthProvider()).then(() => {
+        this.router.navigate(['dashboard']);
+      });
   }
 
   // Auth logic to run auth providers
@@ -174,6 +172,7 @@ export class AuthService {
       //emailVerified: user.emailVerified,
     };
     this.addUser(userData);
+
     return userRef.set(userData, {
       merge: true,
     });
