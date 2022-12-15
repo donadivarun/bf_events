@@ -1,3 +1,5 @@
+import { User } from 'src/app/models/user.model';
+import { EventService } from 'src/app/events/event.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Event } from '../models/event.model';
 import { AuthService } from '../shared/services/auth.service';
@@ -18,11 +20,14 @@ export class ProfileComponent implements OnInit {
   eventsOwn!: Event[];
   id = '';
   errorMessage = '';
+  user: User = new User(false, '', '', '', '');
+  isowner!: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private profileService: ProfileService,
-    public authService: AuthService
+    public authService: AuthService,
+    public eventService: EventService
   ) {}
 
   getEventsLiked(): void {
@@ -83,15 +88,35 @@ export class ProfileComponent implements OnInit {
   trackEvent(i: number, event: Event): string {
     return event.id;
   }
+  getUser(id: string): void {
+    this.eventService
+      .getuser(id)
+      .pipe(
+        catchError((err) => {
+          this.showError(err);
+          return of();
+        })
+      )
+      .subscribe((user) => {this.user = user
+        this.isowner = this.isOwner(id);
+        console.log(this.isowner)
+      console.log(this.user)});
+  }
+  isOwner(id: String): boolean {
+    console.log("Checking owner")
+    console.log(this.authService.userData.uid)
+    console.log(id)
+    return this.authService.userData.uid == id ? true : false;
+  }
+
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     console.log(id);
     if (id) {
-      console.log('true');
       this.getUserEventsLiked(id);
       this.getUserEventsOwn(id);
+      this.getUser(id);
     } else {
-      console.log('false');
       this.getEventsLiked();
       this.getEventsOwn();
     }
