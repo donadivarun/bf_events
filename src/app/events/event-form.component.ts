@@ -9,7 +9,6 @@ import {
   OnDestroy,
 } from '@angular/core';
 
-
 @Component({
   selector: 'app-event-form',
   templateUrl: './event-form.component.html',
@@ -17,7 +16,9 @@ import {
 })
 export class EventFormComponent implements OnInit {
 
+
   event: Event = new Event('', '', '', '', '', 0, new Date(), false, '' );
+
   image: string = '';
 
   @Input() editMode!: boolean;

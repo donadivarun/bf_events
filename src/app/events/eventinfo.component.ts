@@ -4,7 +4,7 @@ import { EventListComponent } from './event-list.component';
 import { EventFormComponent } from './../events/event-form.component';
 import { Event } from '../models/event.model';
 import { Descripton } from './../models/descripton.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EventService } from '../events/event.service';
 import { catchError, Observable, of } from 'rxjs';
@@ -18,12 +18,17 @@ import { User } from '../models/user.model';
   providers: [EventListComponent],
 })
 export class EventinfoComponent implements OnInit {
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes);
+  }
   edit = true;
   isowner!: boolean;
   id = '';
   @Input()
+
   event: Event = new Event('', '', '', '', '', 0, new Date(), false, '');
   comment: Comment = new Comment('', '', '', '', new Date(), '', '' );
+
   comments!: Comment[];
   user!: User;
   descriptons: Descripton[] = [
@@ -81,8 +86,7 @@ export class EventinfoComponent implements OnInit {
         })
       )
       .subscribe((comment) => (this.comment = comment));
-      location.reload();
-      
+    location.reload();
   }
   getEvent(): void {
     this.eventService
@@ -99,16 +103,19 @@ export class EventinfoComponent implements OnInit {
         this.isowner = this.isOwner();
 
     });
+
   }
   getUser(uid: string): string {
     this.eventService
       .getuser(uid)
-       .pipe(catchError(err => {
-         this.showError(err);
-         return of();
-      }))
+      .pipe(
+        catchError((err) => {
+          this.showError(err);
+          return of();
+        })
+      )
       .subscribe((user) => (this.user = user));
-      return this.user.first_name;
+    return this.user.first_name;
   }
   deleteEvent(event: Event): void {
     alert('The event will be delted!');
