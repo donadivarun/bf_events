@@ -1,6 +1,6 @@
 import { Comment } from '@angular/compiler';
 import { Injectable } from '@angular/core';
-import { Event } from '../models/event';
+import { Event } from '../models/event.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';

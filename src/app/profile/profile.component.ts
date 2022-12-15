@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Event } from '../models/event';
+import { Event } from '../models/event.model';
 import { AuthService } from '../shared/services/auth.service';
 import { ProfileService } from './profile.service';
 import { catchError, of } from 'rxjs';
