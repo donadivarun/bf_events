@@ -2,7 +2,7 @@ import { AuthService } from './../shared/services/auth.service';
 import { Comment } from './../models/comment.model';
 import { EventListComponent } from './event-list.component';
 import { EventFormComponent } from './../events/event-form.component';
-import { Event } from './../models/event';
+import { Event } from '../models/event.model';
 import { Descripton } from './../models/descripton.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -87,10 +87,13 @@ export class EventinfoComponent implements OnInit {
   getEvent(): void {
     this.eventService
       .getEvent(this.id)
-       .pipe(catchError(err => {
-         this.showError(err);
-         return of();
-      }))
+
+      .pipe(
+        catchError((err) => {
+          this.showError(err);
+          return of();
+        })
+      )
       .subscribe((event) => (this.event = event));
       console.log(this.event)
   }

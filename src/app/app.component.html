@@ -56,7 +56,10 @@
                 </li>
 
                 <!-- Signup-->
-                <li class="flex items-center">
+                <li
+                  class="flex items-center"
+                  [ngClass]="authService.isLoggedIn ? 'hidden' : ''"
+                >
                   <mat-icon>Signin--</mat-icon>
                   <a
                     (click)="sidebar = !sidebar"
@@ -130,14 +133,17 @@
               </li>
 
               <!-- Signup-->
-              <li class="flex items-center">
+              <li
+                class="flex items-center"
+                [ngClass]="authService.isLoggedIn ? 'hidden' : ''"
+              >
                 <mat-icon>Signin--</mat-icon>
                 <a
                   (click)="sidebar = !sidebar"
                   routerLink="/signup"
                   routerLinkActive="active"
                   class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-                  >Sign in</a
+                  >Sign up</a
                 >
               </li>
 

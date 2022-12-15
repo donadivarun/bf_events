@@ -1,6 +1,6 @@
 import { AuthGuard } from './shared/guard/auth.guard';
 import { EventListComponent } from './events/event-list.component';
-import { Event } from './models/event';
+import { Event } from './models/event.model';
 import { Component } from '@angular/core';
 
 import { AuthService } from './shared/services/auth.service';

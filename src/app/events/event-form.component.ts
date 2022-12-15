@@ -1,5 +1,5 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { Event } from './../models/event';
+import { Event } from '../models/event.model';
 import {
   Component,
   OnInit,
