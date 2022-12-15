@@ -172,9 +172,51 @@
               </td>
             </a>
           </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- If User isn't the Owner, dont show this  -->
+<div>
+  <!-- Update/edit event  -->
+  <div class="flex justify-center p-6">
+
+    <!-- Event delete button -->
+    <button
+      type="button"
+      class="bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700"
+      [ngClass]="isowner ? '' : 'hidden'"
+      (click)="deleteEvent(event)"
+    >
+      <p>Delete</p>
+    </button>
+
+    <!-- Event form component -->
+
+    <button
+      (click)="setUpdateBool(true)"
+      (click)="edit = !edit"
+      class="bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700"
+      [ngClass]="isowner ? '' : 'hidden'"
+    >
+      <p>Update</p>
+    </button>
+
+    <!-- Event form component -->
+    <div *ngIf="UpdateBool">
+      <app-event-form
+        [editMode]="true"
+        [editableEvent]="event"
+        (createEvent)="updateEvent($event)"
+      ></app-event-form>
+    </div>
+
         </tr>
       </tbody>
     </table>
     <div></div>
+
   </div>
 </div>
