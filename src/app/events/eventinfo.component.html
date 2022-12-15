@@ -86,7 +86,8 @@
           </th>
         </thead>
         <tbody>
-          <tr class="w-full max-h-[540px] flex justify-center">
+          <tr *ngFor="let comment of comments; trackBy: trackComment"
+          class="w-full max-h-[540px] flex justify-center">
             <div
               class="flex w-full h-20 p-3 duration-300 bg-white shadow-2xl rounded-b-md dark:bg-gray-900"
             >
@@ -95,7 +96,8 @@
                   class="flex items-center self-center justify-center col-span-2"
                 >
                   <p class="self-center text-lg">
-                    {{ comment.u_comment }}
+                   {{comment.first_name}} {{comment. last_name}}
+                   {{ comment.u_comment }}
                   </p>
                 </td>
               </a>
@@ -121,6 +123,7 @@
             <button
               type="submit"
               class="bg-blue-400 rounded-lg m-4 w-[130px] h-7 text-white hover:bg-sky-700"
+              (click)="addComment(comment)"
             >
               <p>Enter</p>
             </button>
