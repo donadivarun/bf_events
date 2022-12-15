@@ -67,6 +67,7 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         console.log(result.user);
+        result.user?.getIdToken().then((token) => (this.token = token));
         this.SetUserData(result.user);
         this.afAuth.authState.subscribe((user) => {
           if (user) {
@@ -87,9 +88,10 @@ export class AuthService {
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
+        result.user?.getIdToken().then((token) => (this.token = token));
         this.SendVerificationMail();
         //this.SetUserData(result.user);
-        this.addUser(new User(result.user?.uid, email, fname, lname, result.user?.uid));
+        this.addUser(new User(false, email, fname, lname, result.user?.uid));
         console.log(result.user);
       })
       .catch((error) => {
@@ -164,13 +166,14 @@ export class AuthService {
       lname = uName.split(" ")[1];
     }
     const userData: User = {
-      uid: user.uid,
-      email: user.email,
       username: user.uid,
+      email: user.email,
+      dark_mode: false,
       first_name: fname,
       last_name: lname,
       //emailVerified: user.emailVerified,
     };
+    console.log(userData);
     this.addUser(userData);
 
     return userRef.set(userData, {

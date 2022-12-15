@@ -1,3 +1,4 @@
+import { AuthService } from './../shared/services/auth.service';
 import { Comment } from './../models/comment.model';
 import { EventListComponent } from './event-list.component';
 import { EventFormComponent } from './../events/event-form.component';
@@ -6,8 +7,9 @@ import { Descripton } from './../models/descripton.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EventService } from '../events/event.service';
-import { catchError, of } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { EventsModule } from '../events/events.module';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-eventinfo',
@@ -20,7 +22,9 @@ export class EventinfoComponent implements OnInit {
   id = '';
   @Input()
   event: Event = new Event('', '', '', '', '', 0, new Date(), false);
-  comment: Comment = new Comment('', '', '', '', new Date());
+  comment: Comment = new Comment('', '', '', '', new Date(), '', '' );
+  comments!: Comment[];
+  user!: User;
   descriptons: Descripton[] = [
     {
       content: 'Better,cooler,Cats!',
@@ -32,7 +36,8 @@ export class EventinfoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private eventService: EventService,
-    private eventList: EventListComponent
+    private eventList: EventListComponent,
+    private authService: AuthService
   ) {}
 
   showError(error: any): void {
@@ -48,29 +53,56 @@ export class EventinfoComponent implements OnInit {
     if (id) {
       this.id = id;
       this.getEvent();
-      console.log('loaded ' + this.id);
+      this.getComments();
+      console.log('loaded ' + this.event.title);
     }
   }
 
-  getComment(): void {
+  getComments(): void {
     this.eventService
-      .getComment(this.id)
+      .getComments(this.id)
       .pipe(
         catchError((err) => {
           this.showError(err);
           return of();
         })
       )
-      .subscribe((event) => (this.event = event));
+      .subscribe((comments) => (this.comments = comments));
+  }
+  addComment(comment: Comment): void {
+    console.log(comment);
+    comment.event_id = this.id;
+    this.eventService
+      .addComment(comment)
+      .pipe(
+        catchError((err) => {
+          this.showError(err);
+          return of();
+        })
+      )
+      .subscribe((comment) => (this.comment = comment));
+      location.reload();
+      
   }
   getEvent(): void {
     this.eventService
       .getEvent(this.id)
-      // .pipe(catchError(err => {
-      //   this.showError(err);
-      //   return of();
-      // }))
+       .pipe(catchError(err => {
+         this.showError(err);
+         return of();
+      }))
       .subscribe((event) => (this.event = event));
+      console.log(this.event)
+  }
+  getUser(uid: string): string {
+    this.eventService
+      .getuser(uid)
+       .pipe(catchError(err => {
+         this.showError(err);
+         return of();
+      }))
+      .subscribe((user) => (this.user = user));
+      return this.user.first_name;
   }
   deleteEvent(event: Event): void {
     alert('The event will be delted!');
@@ -99,5 +131,8 @@ export class EventinfoComponent implements OnInit {
       )
       .subscribe(() => this.eventList.getEvents());
     location.reload();
+  }
+  trackComment(i: number, comment: Comment): string {
+    return comment.comment_id;
   }
 }

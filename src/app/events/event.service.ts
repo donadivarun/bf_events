@@ -1,4 +1,4 @@
-import { Comment } from '@angular/compiler';
+import { Comment } from './../models/comment.model';
 import { Injectable } from '@angular/core';
 import { Event } from '../models/event';
 import { HttpClient } from '@angular/common/http';
@@ -67,22 +67,24 @@ export class EventService {
   }
 
   adduser(user: User): Observable<User> {
-    console.log("adding user in events file");
-    console.log(user);
     return this.httpClient.post<User>(`${this.url}/user`, user);
   }
+  getuser(id: string): Observable<User> {
+    return this.httpClient.get<User>(`${this.url}/user/${id}`);
+  }
 
-  getComment(id: String): Observable<Event> {
-    return this.httpClient.get<Event>(
+  getComments(id: String): Observable<Comment[]> {
+    console.log("cid = ", id)
+    return this.httpClient.get<Comment[]>(
       `${this.url}/comments/${id}`,
       this.setHeader()
     );
   }
 
-  addCommment(comment: Comment): Observable<Comment> {
+  addComment(comment: Comment): Observable<Comment> {
     console.log(comment);
     return this.httpClient.post<Comment>(
-      `${this.url}/events`,
+      `${this.url}/comments`,
       comment,
       this.setHeader()
     );

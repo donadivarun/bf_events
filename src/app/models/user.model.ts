@@ -1,9 +1,10 @@
 export class User {
   constructor(
-    public username: string | undefined,
+    public dark_mode: boolean,
     public email: string,
     public first_name: string,
     public last_name: string,
-    public uid: string | undefined
+    public username: string | undefined
+
   ) {}
 }
