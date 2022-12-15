@@ -19,9 +19,10 @@ import { User } from '../models/user.model';
 })
 export class EventinfoComponent implements OnInit {
   edit = true;
+  isowner!: boolean;
   id = '';
   @Input()
-  event: Event = new Event('', '', '', '', '', 0, new Date(), false);
+  event: Event = new Event('', '', '', '', '', 0, new Date(), false, '');
   comment: Comment = new Comment('', '', '', '', new Date(), '', '' );
   comments!: Comment[];
   user!: User;
@@ -54,8 +55,8 @@ export class EventinfoComponent implements OnInit {
       this.id = id;
       this.getEvent();
       this.getComments();
-      console.log('loaded ' + this.event.title);
     }
+ 
   }
 
   getComments(): void {
@@ -70,7 +71,6 @@ export class EventinfoComponent implements OnInit {
       .subscribe((comments) => (this.comments = comments));
   }
   addComment(comment: Comment): void {
-    console.log(comment);
     comment.event_id = this.id;
     this.eventService
       .addComment(comment)
@@ -87,15 +87,18 @@ export class EventinfoComponent implements OnInit {
   getEvent(): void {
     this.eventService
       .getEvent(this.id)
-
       .pipe(
         catchError((err) => {
           this.showError(err);
           return of();
         })
       )
-      .subscribe((event) => (this.event = event));
-      console.log(this.event)
+      .subscribe(event => {
+        this.event = event;
+        console.log(this.event);
+        this.isowner = this.isOwner();
+
+    });
   }
   getUser(uid: string): string {
     this.eventService
@@ -134,6 +137,10 @@ export class EventinfoComponent implements OnInit {
       )
       .subscribe(() => this.eventList.getEvents());
     location.reload();
+  }
+  isOwner(): boolean {
+    return this.authService.userData.uid == this.event.user_id ? true : false;
+
   }
   trackComment(i: number, comment: Comment): string {
     return comment.comment_id;
