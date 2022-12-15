@@ -8,4 +8,5 @@ COPY . .
 RUN ng build
 FROM nginx
 COPY --from=b /usr/src/app/dist/bf_events /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/nginx.conf
 
