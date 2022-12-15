@@ -52,7 +52,6 @@ export class EventService {
     );
   }
   getEvent(id: String): Observable<Event> {
-    console.log('calling network');
     return this.httpClient.get<Event>(
       `${this.url}/event/${id}`,
       this.setHeader()
@@ -74,7 +73,6 @@ export class EventService {
   }
 
   getComments(id: String): Observable<Comment[]> {
-    console.log("cid = ", id)
     return this.httpClient.get<Comment[]>(
       `${this.url}/comments/${id}`,
       this.setHeader()
