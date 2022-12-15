@@ -68,6 +68,7 @@ export class EventService {
   adduser(user: User): Observable<User> {
     return this.httpClient.post<User>(`${this.url}/user`, user);
   }
+
   getuser(id: string): Observable<User> {
     return this.httpClient.get<User>(`${this.url}/user/${id}`);
   }
@@ -87,5 +88,6 @@ export class EventService {
       this.setHeader()
     );
   }
+
   private url: string = environment.url;
 }
