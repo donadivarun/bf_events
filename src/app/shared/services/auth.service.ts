@@ -166,7 +166,7 @@ export class AuthService {
       lname = uName.split(" ")[1];
     }
     const userData: User = {
-      uid: user.uid,
+      username: user.uid,
       email: user.email,
       dark_mode: false,
       first_name: fname,
