@@ -63,7 +63,8 @@
                   <img
                     class="xl:h-[250px] xl:w-[250px] sm:h-[200px] sm:w-[200px] md:h-[150px] md:w-[150px] lg:h-[150px] lg:w-[150px]"
                     src="{{
-                      event.image | noImage : '../assets/img/catIcon.png'
+                      event.image
+                        | noImage : '../assets/img/CatWithGlasses.jpeg'
                     }}"
                     alt="{{ event.title }}"
                   />
