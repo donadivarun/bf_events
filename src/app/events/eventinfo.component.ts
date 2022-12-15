@@ -22,7 +22,7 @@ export class EventinfoComponent implements OnInit {
   id = '';
   @Input()
   event: Event = new Event('', '', '', '', '', 0, new Date(), false);
-  comment: Comment = new Comment('', '', '', '', new Date());
+  comment: Comment = new Comment('', '', '', '', new Date(), '', '' );
   comments!: Comment[];
   user!: User;
   descriptons: Descripton[] = [
