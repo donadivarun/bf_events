@@ -175,22 +175,21 @@
       <tbody>
         <tr
           *ngFor="let comment of comments; trackBy: trackComment"
-          class="flex justify-center w-full duration-500 shadow-sm hover:scale-95 dark:text-white"
+          class="flex justify-center w-full duration-500 shadow-sm hover:scale-x-95 dark:text-white"
         >
           <div
             class="flex w-full h-20 p-3 bg-white shadow-2xl dark:bg-gray-900 dark:text-white"
           >
-            <a [routerLink]="[]" class="grid grid-cols-3">
+            <a class="grid grid-cols-3">
               <td
                 class="flex items-center self-center justify-center col-span-2 px-6"
               >
                 <div>
-                  <a>
-                    <p
-                      class="self-center text-xs text-slate-500 dark:text-white"
-                    >
-                      {{ comment.first_name }} {{ comment.last_name }}
-                    </p>
+                  <a
+                    class="self-center text-xs text-slate-500 dark:text-white"
+                    [routerLink]="['/profile/' + comment.username]"
+                  >
+                    {{ comment.first_name }} {{ comment.last_name }}
                   </a>
                   <p class="self-center text-lg dark:text-white">
                     {{ comment.u_comment }}

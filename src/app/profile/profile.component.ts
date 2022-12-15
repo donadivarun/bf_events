@@ -4,6 +4,7 @@ import { AuthService } from '../shared/services/auth.service';
 import { ProfileService } from './profile.service';
 import { catchError, of } from 'rxjs';
 import { NoImagePipe } from '../shared/pipes/no-image.pipe';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -15,9 +16,11 @@ export class ProfileComponent implements OnInit {
   @Input()
   eventsLiked!: Event[];
   eventsOwn!: Event[];
+  id = '';
   errorMessage = '';
 
   constructor(
+    private route: ActivatedRoute,
     private profileService: ProfileService,
     public authService: AuthService
   ) {}
@@ -45,6 +48,30 @@ export class ProfileComponent implements OnInit {
       )
       .subscribe((events) => (this.eventsOwn = events));
   }
+
+  getUserEventsLiked(id: string): void {
+    this.profileService
+      .getUserLikedEvents(id)
+      .pipe(
+        catchError((err) => {
+          this.showError(err);
+          return of([]);
+        })
+      )
+      .subscribe((events) => (this.eventsLiked = events));
+  }
+
+  getUserEventsOwn(id: string): void {
+    this.profileService
+      .getUsersOwnEvents(id)
+      .pipe(
+        catchError((err) => {
+          this.showError(err);
+          return of([]);
+        })
+      )
+      .subscribe((events) => (this.eventsOwn = events));
+  }
   showError(error: any): void {
     this.errorMessage = error.message
       ? error.message
@@ -57,7 +84,16 @@ export class ProfileComponent implements OnInit {
     return event.id;
   }
   ngOnInit(): void {
-    this.getEventsLiked();
-    this.getEventsOwn();
+    const id = this.route.snapshot.paramMap.get('id');
+    console.log(id);
+    if (id) {
+      console.log('true');
+      this.getUserEventsLiked(id);
+      this.getUserEventsOwn(id);
+    } else {
+      console.log('false');
+      this.getEventsLiked();
+      this.getEventsOwn();
+    }
   }
 }

@@ -1,3 +1,4 @@
+import { User } from './../shared/services/user';
 import { Injectable } from '@angular/core';
 import { Event } from '../models/event.model';
 import { HttpClient } from '@angular/common/http';
@@ -31,6 +32,20 @@ export class ProfileService {
   getLikedEvents(): Observable<Event[]> {
     return this.httpClient.get<Event[]>(
       `${this.url}/profile/liked_events`,
+      this.setHeader()
+    );
+  }
+
+ 
+  getUserLikedEvents(id: string): Observable<Event[]> {
+    return this.httpClient.get<Event[]>(
+      `${this.url}/profile/liked_events/${id}`,
+      this.setHeader()
+    );
+  }
+  getUsersOwnEvents(id: string): Observable<Event[]> {
+    return this.httpClient.get<Event[]>(
+      `${this.url}/profile/created_events/${id}`,
       this.setHeader()
     );
   }
