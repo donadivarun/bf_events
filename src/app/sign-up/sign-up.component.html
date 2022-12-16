@@ -2,7 +2,7 @@
   <div class="justify-center h-auto p-12 shadow-2xl w-96 rounded-xl">
     <div>
       <h1
-        class="flex text-[56px] leading-[64px] font-medium text-[#7f8a9B] align-middle mb-7 justify-center"
+        class="flex text-3xl font-medium text-[#7f8a9B] align-middle mb-7 justify-center"
       >
         Create an Account
       </h1>
@@ -27,7 +27,7 @@
             First Name
           </label>
           <input
-            class="flex px-[13px] py-3 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full"
+            class="flex px-[13px] py-3 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full dark:text-black"
             type="text"
             placeholder="First Name"
             #firstName
@@ -35,18 +35,18 @@
         </div>
 
         <div class="my-5">
-            <label
-              class="flex flex-row h-4 gap-3 p-0 my-1 text-xs font-normal text-blue-400 w-60"
-            >
-              Last Name
-            </label>
-            <input
-              class="flex px-[13px] py-3 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full"
-              type="text"
-              placeholder="Last Name"
-              #lastName
-            />
-          </div>
+          <label
+            class="flex flex-row h-4 gap-3 p-0 my-1 text-xs font-normal text-blue-400 w-60"
+          >
+            Last Name
+          </label>
+          <input
+            class="flex px-[13px] py-3 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full dark:text-black"
+            type="text"
+            placeholder="Last Name"
+            #lastName
+          />
+        </div>
 
         <div class="my-5">
           <label
@@ -55,7 +55,7 @@
             Password
           </label>
           <input
-            class="flex px-[13px] py-3 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full"
+            class="flex px-[13px] py-3 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full dark:text-black"
             type="password"
             placeholder="Password"
             #userPwd
@@ -65,25 +65,32 @@
           <button
             class="px-6 pt-3 bg-blue-400 rounded-lg w-[130px] h-[48px] gap-2 justify-center flex flex-row text-white hover:bg-blue-500"
             type="submit"
-            (click)="authService.SignUp(userEmail.value, userPwd.value, firstName.value, lastName.value)"
+            (click)="
+              authService.SignUp(
+                userEmail.value,
+                userPwd.value,
+                firstName.value,
+                lastName.value
+              )
+            "
           >
             Sign up
           </button>
         </div>
-        OR
+
         <div class="flex justify-center mt-8">
-            <button
-              type="button"
-              (click)="authService.GoogleAuth()"
-              class="flex flex-row items-center justify-center gap-2 p-3 bg-white rounded-lg hover:bg-gray-500 border-[1.5px] border-gray-400"
-            >
-            Log in with
-              <img
-                class="flex justify-center w-8 h-8"
-                src="../../assets/img/GoogleLogo.svg.png"
-              />
-            </button>
-          </div>
+          <button
+            type="button"
+            (click)="authService.GoogleAuth()"
+            class="flex flex-row items-center justify-center gap-2 p-3 bg-white rounded-lg hover:bg-gray-500 border-[1.5px] border-gray-400 dark:text-black"
+          >
+            Sign up with
+            <img
+              class="flex justify-center w-8 h-8"
+              src="../../assets/img/GoogleLogo.svg.png"
+            />
+          </button>
+        </div>
       </div>
     </div>
   </div>
