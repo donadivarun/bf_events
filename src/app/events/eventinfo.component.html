@@ -50,7 +50,7 @@
   </div>
 </div>
 
-<div class="">
+<div class="min-h-screen">
   <!-- Title -->
 
   <h1
@@ -58,78 +58,77 @@
   >
     Infos for {{ event.title }}
   </h1>
+  <div class="flex">
+    <div
+      class="xl:min-h-[300px] sm:min-h-[300px] md:min-h-[250px] lg:min-h-[250px] bg-slate-200 dark:bg-gray-700"
+    >
+      <!-- Event image -->
 
-  <div
-    class="px-28 rounded-lg xl:min-h-[300px] sm:min-h-[300px] md:min-h-[250px] lg:min-h-[250px]"
-  >
-    <!-- Event image -->
+      <img
+        class="flex float-left mx-8 my-4 rounded-lg shadow-md xl:min-h-[200px] xl:min-w-[200px] xl:max-w-[250px] xl:max-h-[250px] sm:min-h-[200px] sm:min-w-[200px] sm:max-w-[250px] sm:max-h-[250px] md:min-h-[150px] md:min-w-[150px] md:max-w-[200px] lg:min-h-[150px] lg:min-w-[150px] lg:max-w-[200px] lg:max-h-[200px]"
+        src="{{ event.image | noImage : '../assets/img/CatWithGlasses.jpeg' }}"
+      />
+    </div>
 
-    <img
-      class="flex float-left mx-8 rounded-lg shadow-md xl:min-h-[200px] xl:min-w-[200px] xl:max-w-[250px] xl:max-h-[250px] sm:min-h-[200px] sm:min-w-[200px] sm:max-w-[250px] sm:max-h-[250px] md:min-h-[150px] md:min-w-[150px] md:max-w-[200px] lg:min-h-[150px] lg:min-w-[150px] lg:max-w-[200px] lg:max-h-[200px]"
-      src="{{ event.image | noImage : '../assets/img/CatWithGlasses.jpeg' }}"
-    />
+    <!-- Event infos -->
+    <div class="px-12 py-12 bg-slate-200 dark:bg-gray-700">
+      <div>
+        <p
+          class="items-center justify-center font-semibold uppercase md:justify-start dark:text-white"
+        >
+          Location:
+        </p>
 
-    <div class="py-10 mx-6 text-center text-black lg:text-left md:text-left">
-      <div class="grid gap-8 grid-1 md:grid-cols-2 lg:grid-cols-4">
-        <!-- Event description -->
-
-        <div>
-          <p
-            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start dark:text-white"
-          >
-            Description:
-          </p>
-
-          <p class="dark:text-white">
-            {{ event.description }}
-          </p>
-        </div>
-
-        <!-- Event infos -->
-
-        <div>
-          <p
-            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start dark:text-white"
-          >
-            Location:
-          </p>
-
-          <p class="dark:text-white">
-            {{ event.location }}
-          </p>
-        </div>
-
-        <div>
-          <p
-            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start dark:text-white"
-          >
-            Date:
-          </p>
-
-          <p class="dark:text-white">
-            {{ event.date | date : "short" }}
-          </p>
-        </div>
-
-        <div>
-          <p
-            class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start dark:text-white"
-          >
-            Likes:
-          </p>
-
-          <p class="dark:text-white">
-            {{ event.likes }}
-          </p>
-        </div>
+        <p class="mb-4 dark:text-white">
+          {{ event.location }}
+        </p>
       </div>
+
+      <div>
+        <p
+          class="items-center justify-center font-semibold uppercase md:justify-start dark:text-white"
+        >
+          Date:
+        </p>
+
+        <p class="mb-4 dark:text-white">
+          {{ event.date | date : "short" }}
+        </p>
+      </div>
+
+      <div>
+        <p
+          class="items-center justify-center font-semibold uppercase md:justify-start dark:text-white"
+        >
+          Likes:
+        </p>
+
+        <p class="mb-4 dark:text-white">
+          {{ event.likes }}
+        </p>
+      </div>
+    </div>
+    <div
+      class="mx-8 my-2 text-center text-black lg:text-left md:text-left min-h-[300px] w-full bg-slate-50 bg-opacity-40 rounded-md px-5 py-1"
+    >
+      <!-- Event description -->
+
+      <p
+        class="flex items-center justify-center mb-4 font-semibold uppercase md:justify-start dark:text-white"
+      >
+        Description:
+      </p>
+
+      <p class="dark:text-white">
+        {{ event.description }}
+      </p>
     </div>
   </div>
 
   <div class="flex content-center justify-center">
     <!-- Fill it comments-->
 
-    <table class="w-full rounded-md bg-slate-200">
+    <table class="w-full rounded-md bg-slate-200 dark:bg-gray-700">
       <thead>
         <th>
           <!-- write a comment  -->
