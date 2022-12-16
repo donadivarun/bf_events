@@ -174,10 +174,11 @@
         </table>
       </div>
       <div
-        class="items-center justify-center w-auto bg-stone-200 dark:bg-gray-800"
+        class="items-center justify-center w-auto overflow-y-auto bg-stone-200 dark:bg-gray-800 max-h-96"
       >
-        <!-- Pending invites table-->
-        <table class="w-full">
+        <!-- Liked events table-->
+
+        <table class="w-full max-h-[240px]">
           <thead class="sticky top-0">
             <th
               class="p-6 text-white bg-blue-500 dark:bg-blue-700 max-h-[440px]"
@@ -207,12 +208,6 @@
                 </div>
               </div>
             </tr>
-            <button
-              class="min-h-full bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700 dark:bg-blue-700"
-              (click)="num = num + 2"
-            >
-              load more
-            </button>
           </tbody>
         </table>
       </div>
