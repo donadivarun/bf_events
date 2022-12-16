@@ -23,6 +23,10 @@ export class ProfileComponent implements OnInit {
   user: User = new User(false, '', '', '', '');
   isowner!: boolean;
 
+  num = 3;
+  num2 = 1;
+
+
   constructor(
     private route: ActivatedRoute,
     private profileService: ProfileService,
