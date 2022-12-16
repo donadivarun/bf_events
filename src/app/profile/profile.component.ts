@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
   @Input()
   eventsLiked!: Event[];
   eventsOwn!: Event[];
-  id = '';
+  id!: string;
   errorMessage = '';
   user: User = new User(false, '', '', '', '');
   isowner!: boolean;
@@ -104,19 +104,31 @@ export class ProfileComponent implements OnInit {
       .subscribe((user) => {this.user = user
         this.isowner = this.isOwner(id);
         console.log(this.isowner)
-      console.log(this.user)});
+      });
   }
   isOwner(id: String): boolean {
-    console.log("Checking owner")
-    console.log(this.authService.userData.uid)
-    console.log(id)
     return this.authService.userData.uid == id ? true : false;
   }
 
+  updateUser(user: User): void {
+    console.log(user)
+    this.profileService
+      .updateUser(user)
+      .pipe(
+        catchError((err) => {
+          this.showError(err);
+          return of({});
+        })
+      )
+      .subscribe(() => {this.getUser(this.id)
+      console.log(this.user)});
+    location.reload();
+    }
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     console.log(id);
     if (id) {
+      this.id = id;
       this.getUserEventsLiked(id);
       this.getUserEventsOwn(id);
       this.getUser(id);

@@ -1,4 +1,4 @@
-import { User } from './../shared/services/user';
+import { User } from 'src/app/models/user.model';
 import { Injectable } from '@angular/core';
 import { Event } from '../models/event.model';
 import { HttpClient } from '@angular/common/http';
@@ -49,6 +49,15 @@ export class ProfileService {
       this.setHeader()
     );
   }
+  updateUser(user: User): Observable<User> {
+    console.log(user)
+    return this.httpClient.put<User>(
+      `${this.url}/user`,
+      user,
+      this.setHeader()
+    );
+  }
+ 
 
   private url: string = environment.url;
 }

@@ -17,7 +17,11 @@
   </div>
   <div class="bg-white w-[30%] rounded-r-3xl mb-6 dark:bg-gray-800">
     <!--TODO: Fill in user infos-->
-    <form action="" [ngClass]="status ? '' : 'hidden'">
+    <form [ngClass]="status ? '' : 'hidden'"
+     #profileForm="ngForm"
+      name="profileForm"
+      (ngSubmit)="updateUser(user)">
+      
       <div class="flex">
         <label
           for="Prename"
@@ -28,6 +32,8 @@
           type="text"
           name="prename"
           class="p-2 border border-b-black dark:bg-gray-800"
+          #first_name="ngModel"
+          [(ngModel)]="user.first_name"
         />
       </div>
       <div class="flex">
@@ -38,12 +44,15 @@
           type="text"
           name="lastname"
           class="p-2 border border-b-black dark:bg-gray-800"
+          #last_name="ngModel"
+          [(ngModel)]="user.last_name"
         />
       </div>
   
 
       <button
         class="min-h-full bg-blue-400 dark:bg-blue-700 rounded-lg mx-6 w-[130px] h-7 my-2 text-white hover:bg-sky-700"
+
       >
         save
       </button>
