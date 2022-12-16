@@ -53,63 +53,69 @@
 <div class="min-h-screen">
   <!-- Title -->
 
-  <h1
-    class="flex justify-center w-full p-3 m-3 text-3xl border-b-2 border-gray-400"
-  >
+  <h1 class="flex justify-center w-full m-3 text-5xl">
     Infos for {{ event.title }}
   </h1>
   <div class="flex">
-    <div
-      class="xl:min-h-[300px] sm:min-h-[300px] md:min-h-[250px] lg:min-h-[250px] bg-slate-200 dark:bg-gray-700"
-    >
-      <!-- Event image -->
+    <div class="w-[40%]">
+      <div class="rounded-tr-3xl bg-slate-200 dark:bg-gray-700">
+        <!-- Event image -->
+        <div
+          class="flex items-center content-center justify-center p-4 bg-transparent shadow-2xl"
+        >
+          <img
+            class="flex shadow-2xl rounded-xl w-96 h-96"
+            src="{{
+              event.image | noImage : '../assets/img/CatWithGlasses.jpeg'
+            }}"
+          />
+        </div>
+      </div>
 
-      <img
-        class="flex float-left mx-8 my-4 rounded-lg shadow-md xl:min-h-[200px] xl:min-w-[200px] xl:max-w-[250px] xl:max-h-[250px] sm:min-h-[200px] sm:min-w-[200px] sm:max-w-[250px] sm:max-h-[250px] md:min-h-[150px] md:min-w-[150px] md:max-w-[200px] lg:min-h-[150px] lg:min-w-[150px] lg:max-w-[200px] lg:max-h-[200px]"
-        src="{{ event.image | noImage : '../assets/img/CatWithGlasses.jpeg' }}"
-      />
+      <!-- Event infos -->
+      <div
+        class="flex items-center content-center justify-center bg-slate-200 dark:bg-gray-700"
+      >
+        <div class="px-12">
+          <p
+            class="items-center justify-center font-semibold uppercase md:justify-start dark:text-white"
+          >
+            Location:
+          </p>
+
+          <p class="mb-4 dark:text-white">
+            {{ event.location }}
+          </p>
+        </div>
+
+        <div class="bottom-0 px-1">
+          <p
+            class="items-center justify-center font-semibold uppercase md:justify-start dark:text-white"
+          >
+            Date:
+          </p>
+
+          <p class="mb-4 dark:text-white">
+            {{ event.date | date : "short" }}
+          </p>
+        </div>
+
+        <div class="px-12">
+          <p
+            class="items-center justify-center font-semibold uppercase md:justify-start dark:text-white"
+          >
+            Likes:
+          </p>
+
+          <p class="mb-4 dark:text-white">
+            {{ event.likes }}
+          </p>
+        </div>
+      </div>
     </div>
 
-    <!-- Event infos -->
-    <div class="px-12 py-12 bg-slate-200 dark:bg-gray-700">
-      <div>
-        <p
-          class="items-center justify-center font-semibold uppercase md:justify-start dark:text-white"
-        >
-          Location:
-        </p>
-
-        <p class="mb-4 dark:text-white">
-          {{ event.location }}
-        </p>
-      </div>
-
-      <div>
-        <p
-          class="items-center justify-center font-semibold uppercase md:justify-start dark:text-white"
-        >
-          Date:
-        </p>
-
-        <p class="mb-4 dark:text-white">
-          {{ event.date | date : "short" }}
-        </p>
-      </div>
-
-      <div>
-        <p
-          class="items-center justify-center font-semibold uppercase md:justify-start dark:text-white"
-        >
-          Likes:
-        </p>
-
-        <p class="mb-4 dark:text-white">
-          {{ event.likes }}
-        </p>
-      </div>
-    </div>
     <div
-      class="mx-8 my-2 text-center text-black lg:text-left md:text-left min-h-[300px] w-full bg-slate-50 bg-opacity-40 rounded-md px-5 py-1"
+      class="mx-8 my-2 text-center text-black lg:text-left md:text-left min-h-[300px] w-full bg-slate-50 bg-opacity-40 rounded-md px-5 py-1 shadow-lg"
     >
       <!-- Event description -->
 
@@ -145,7 +151,7 @@
                 name="commenttitle"
                 #commenttitle="ngModel"
                 [(ngModel)]="comment.u_comment"
-                class="dark:text-black flex px-[13px] py-1 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-full"
+                class="dark:text-black float-right flex px-[13px] py-1 border-[1.5px] border-blue-400 rounded-lg border-solid placeholder-blue-400 w-[500px]"
               ></textarea>
 
               <button
@@ -179,11 +185,9 @@
           <div
             class="flex w-full h-20 p-3 bg-white shadow-2xl dark:bg-gray-900 dark:text-white"
           >
-            <a class="grid grid-cols-3">
-              <td
-                class="flex items-center self-center justify-center col-span-2 px-6"
-              >
-                <div>
+            <a class="w-full">
+              <td class="flex items-center self-center justify-center px-6">
+                <div class="w-full">
                   <a
                     class="self-center text-xs text-slate-500 dark:text-white"
                     [routerLink]="['/profile/' + comment.username]"
@@ -191,7 +195,7 @@
                     {{ comment.first_name }} {{ comment.last_name }}
                     {{ comment.comment_date | date : "short" }}
                   </a>
-                  <p class="self-center text-lg dark:text-white">
+                  <p class="self-center w-full text-lg dark:text-white">
                     {{ comment.u_comment }}
                   </p>
                 </div>
