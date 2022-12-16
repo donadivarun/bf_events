@@ -190,6 +190,7 @@
                     [routerLink]="['/profile/' + comment.username]"
                   >
                     {{ comment.first_name }} {{ comment.last_name }}
+                    {{ comment.comment_date | date : "short" }}
                   </a>
                   <p class="self-center text-lg dark:text-white">
                     {{ comment.u_comment }}
