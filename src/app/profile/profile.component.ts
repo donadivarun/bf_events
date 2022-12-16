@@ -18,6 +18,8 @@ export class ProfileComponent implements OnInit {
   eventsOwn!: Event[];
   id = '';
   errorMessage = '';
+  num = 3;
+  num2 = 1;
 
   constructor(
     private route: ActivatedRoute,

@@ -67,62 +67,25 @@
   <div class="flex items-center justify-center p-4 m-8 mb-32">
     <div class="grid gap-14 xl:grid-cols-3 lg:grid-cols-2 sm:grid-cols-1">
       <!-- Overview of your events table-->
-      <div class="bg-stone-200 dark:bg-gray-800">
-        <table class="w-96">
-          <thead>
+      <div
+        class="items-center justify-center overflow-y-auto w-96 bg-stone-200 dark:bg-gray-800 max-h-96"
+      >
+        <!-- Liked events table-->
+
+        <table class="w-full max-h-[240px]">
+          <thead class="sticky top-0">
             <th class="p-6 text-white bg-blue-500 dark:bg-blue-700">
               <p>Overview of your events</p>
             </th>
           </thead>
-          <!--TODO: Fill in event infos-->
-          <tbody>
-            <tr
-              *ngFor="let event of eventsOwn; trackBy: trackEvent"
-              class="w-full max-h-[540px] flex justify-center"
-            >
-              <div
-                class="flex w-full h-20 p-3 duration-300 bg-white rounded-md shadow-2xl dark:bg-gray-900 hover:scale-95"
-              >
-                <a
-                  [routerLink]="['/info/' + event.id]"
-                  class="grid grid-cols-3"
-                >
-                  <td class="h-14">
-                    <img
-                      class="items-center justify-center rounded-full h-14 w-14"
-                      src="{{
-                        event.image | noImage : '../assets/img/catIcon.png'
-                      }}"
-                      alt="{{ event.title }}"
-                    />
-                  </td>
-                  <td
-                    class="flex items-center self-center justify-center col-span-2"
-                  >
-                    <p class="text-lg">{{ event.title }}</p>
-                  </td>
-                </a>
-              </div>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div
-        class="items-center justify-center w-auto bg-stone-200 dark:bg-gray-800"
-      >
-        <!-- Liked events table-->
 
-        <table class="w-full">
-          <thead>
-            <th class="p-6 text-white bg-blue-500 dark:bg-blue-700">
-              <p>Liked events</p>
-            </th>
-          </thead>
-          <!--TODO: Fill in event infos-->
-          <tbody>
+          <tbody class="overflow-y-auto h-96">
             <tr
-              *ngFor="let event of eventsLiked; trackBy: trackEvent"
-              class="w-full max-h-[540px] flex justify-center"
+              *ngFor="
+                let event of eventsOwn | slice : 0 : num2;
+                trackBy: trackEvent
+              "
+              class="flex justify-center w-full"
             >
               <div
                 class="flex w-full h-20 p-3 duration-300 bg-white rounded-md shadow-2xl dark:bg-gray-900 hover:scale-95"
@@ -148,6 +111,65 @@
                 </a>
               </div>
             </tr>
+            <button
+              class="min-h-full bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700 dark:bg-blue-700"
+              (click)="num2 = num2 + 2"
+            >
+              load more
+            </button>
+          </tbody>
+        </table>
+      </div>
+      <div
+        class="items-center justify-center w-auto overflow-y-auto bg-stone-200 dark:bg-gray-800 max-h-96"
+      >
+        <!-- Liked events table-->
+
+        <table class="w-full max-h-[240px]">
+          <thead class="sticky top-0">
+            <th class="p-6 text-white bg-blue-500 dark:bg-blue-700">
+              <p>Liked events</p>
+            </th>
+          </thead>
+
+          <tbody class="overflow-y-auto h-96">
+            <tr
+              *ngFor="
+                let event of eventsLiked | slice : 0 : num;
+                trackBy: trackEvent
+              "
+              class="flex justify-center w-full"
+            >
+              <div
+                class="flex w-full h-20 p-3 duration-300 bg-white rounded-md shadow-2xl dark:bg-gray-900 hover:scale-95"
+              >
+                <a
+                  [routerLink]="['/info/' + event.id]"
+                  class="grid grid-cols-3"
+                >
+                  <td class="h-14">
+                    <img
+                      src="{{
+                        event.image | noImage : '../assets/img/catIcon.png'
+                      }}"
+                      alt="{{ event.title }}"
+                      class="items-center justify-center rounded-full h-14 w-14"
+                    />
+                  </td>
+                  <td
+                    class="flex items-center self-center justify-center col-span-2"
+                  >
+                    <p class="self-center text-lg">{{ event.title }}</p>
+                  </td>
+                </a>
+              </div>
+            </tr>
+            <button
+              class="min-h-full bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700 dark:bg-blue-700"
+              (click)="num = num + 2"
+            >
+              load more
+            </button>
           </tbody>
         </table>
       </div>
@@ -156,13 +178,15 @@
       >
         <!-- Pending invites table-->
         <table class="w-full">
-          <thead>
-            <th class="p-6 text-white bg-blue-500 dark:bg-blue-700">
+          <thead class="sticky top-0">
+            <th
+              class="p-6 text-white bg-blue-500 dark:bg-blue-700 max-h-[440px]"
+            >
               <p>Pending invites</p>
             </th>
           </thead>
           <!--TODO: Fill in event infos-->
-          <tbody>
+          <tbody class="overflow-y-auto h-96">
             <tr class="w-full max-h-[540px] flex justify-center">
               <div
                 class="flex w-full h-20 p-3 duration-300 bg-white rounded-md shadow-2xl dark:bg-gray-900 hover:scale-95"
@@ -183,6 +207,12 @@
                 </div>
               </div>
             </tr>
+            <button
+              class="min-h-full bg-blue-400 rounded-lg mx-6 w-[130px] h-7 text-white hover:bg-sky-700 dark:bg-blue-700"
+              (click)="num = num + 2"
+            >
+              load more
+            </button>
           </tbody>
         </table>
       </div>
